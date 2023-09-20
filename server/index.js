@@ -1,11 +1,23 @@
 const express = require('express');
 const app = express();
+const sequelize = require('./models/photoSchema');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const router = require('./router');
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+app.use(cors());
+app.use(bodyParser.json());
+app.use(router);
 
 const PORT = 3001;
-app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
-});
+(async () => {
+  try {
+    await sequelize.sync();
+    console.log('DB Connected 📚');
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT} 🎉`);
+    });
+  } catch (error) {
+    console.log('Error', error);
+  }
+})();
