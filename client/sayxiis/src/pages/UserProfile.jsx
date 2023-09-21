@@ -1,6 +1,6 @@
 import ImagesGrid from '../components/ImagesGrid';
 import UserHeader from '../components/UserHeader';
-import './userProfile.css';
+import './styles/userProfile.css';
 // import PropTypes from 'prop-types';
 
 export default function UserProfile({ users }) {
