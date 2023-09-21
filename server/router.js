@@ -1,10 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('./controllers/photoController');
+const photoController = require('./controllers/photoController');
+const userController = require('./controllers/userProfileController');
 
-router.get('/photos', controller.getAllPhotos);
-router.get('/', function (req, res) {
-  res.send('welcome from router');
-});
+// Photo Router
+router.get('/photos', photoController.getAllPhotos);
+router.get('/photos/:id', photoController.getPhotoById);
+router.post('/photos', photoController.addPhoto);
+router.delete('/photos/:id', photoController.deletePhoto);
+
+// User Router
+router.get('/users', userController.getAllUsers);
+router.get('/users/:id', userController.getAllUserById);
+router.post('/users', userController.addUser);
+router.put('/users/:id', userController.updateUser);
+router.delete('/users/:id', userController.deleteUser);
 
 module.exports = router;
