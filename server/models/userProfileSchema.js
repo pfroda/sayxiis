@@ -1,13 +1,13 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('./connectionDB');
 
-const Profile = sequelize.define('userProfile', {
+const Profile = sequelize.define('usersdb', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
-  usarname: {
+  username: {
     type: DataTypes.STRING,
     allowNull: false,
   },
