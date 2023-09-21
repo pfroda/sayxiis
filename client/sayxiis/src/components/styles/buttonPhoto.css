@@ -1,0 +1,19 @@
+.buttonPhoto {
+  background-color: var(--main--blue);
+  border: 0.3rem solid #fffcfc;
+  color: var(--main--brown);
+  font-weight: 800;
+  font-size: 0.6em;
+  transition: border-color 0.25s;
+  border-radius: 100%;
+  height: 50px;
+  width: 50px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  /* outline: 10px solid var(--main-white); */
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.buttonPhoto:hover {
+  transform: scale(1.1);
+}
