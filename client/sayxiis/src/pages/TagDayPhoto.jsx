@@ -1,5 +1,4 @@
 import Button from '../components/Button';
-import ButtonPhoto from '../components/ButtonPhoto';
 import InputPhoto from '../components/InputPhoto';
 import './styles/tagDayPhoto.css';
 

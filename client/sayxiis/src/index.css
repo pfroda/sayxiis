@@ -22,3 +22,7 @@ body {
   width: 100vw;
   color: var(--main--brown);
 }
+
+a {
+  text-decoration: none;
+}

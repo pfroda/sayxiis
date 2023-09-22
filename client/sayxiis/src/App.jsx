@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import UserProfile from './pages/UserProfile';
-import { getAllUsers, getUserById } from '../apiService';
+import { getAllUsers } from '../apiService';
 import TagDayPhoto from './pages/TagDayPhoto';
 import { Routes, Route } from 'react-router-dom';
 
