@@ -1,4 +1,4 @@
-import './styles/photo.css';
+import './styles/images.css';
 
 export default function Images({ photo }) {
   return (
