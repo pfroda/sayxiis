@@ -2,6 +2,7 @@ import Button from './Button';
 import InputPhoto from './InputPhoto';
 import './styles/userHeader.css';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default function UserHeader({ user }) {
   return (
@@ -34,3 +35,14 @@ export default function UserHeader({ user }) {
     </div>
   );
 }
+
+UserHeader.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    surname: PropTypes.string.isRequired,
+    intro: PropTypes.string.isRequired,
+    profilePicture: PropTypes.string.isRequired,
+  }).isRequired,
+};

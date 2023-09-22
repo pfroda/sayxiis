@@ -1,23 +1,9 @@
-import { useEffect, useState } from 'react';
 import ImagesGrid from '../components/ImagesGrid';
 import UserHeader from '../components/UserHeader';
 import './styles/userProfile.css';
-import { getAllPhotosDb } from '../../apiService';
 import PropTypes from 'prop-types';
 
-export default function UserProfile({ users }) {
-  const [userPhotos, setuserPhotos] = useState([]);
-
-  useEffect(() => {
-    getAllPhotosDb()
-      .then((res) => {
-        setuserPhotos(res);
-      })
-      .catch((error) => {
-        console.error('Error fetching user photos:', error);
-      });
-  }, []);
-
+export default function UserProfile({ users, photos }) {
   return (
     <div className="userProfile">
       {users.map((user) => (
@@ -26,16 +12,22 @@ export default function UserProfile({ users }) {
         </div>
       ))}
 
-      <ImagesGrid userPhotos={userPhotos} />
+      <ImagesGrid photos={photos} />
     </div>
   );
 }
 
-// Define propTypes for the 'users' prop
+// Define propTypes for the 'users and photos' prop
 UserProfile.propTypes = {
   users: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+
+  photos: PropTypes.arrayOf(
+    PropTypes.shape({
+      photoUrl: PropTypes.string.isRequired,
     })
   ).isRequired,
 };

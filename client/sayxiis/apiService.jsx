@@ -1,5 +1,6 @@
-// const API_KEY = process.env.REACT_APP_API_KEY;
-// const unsplashUrl = `https://api.unsplash.com/photos/?client_id=${API_KEY}`;
+import axios from 'axios';
+const clientId = 'EP4f4pfCgj_xyW4iKewZgtPiYKJlCHPig_fhLU2EA_U';
+const UNSPLASH_ROOT = 'https://api.unsplash.com';
 const url = 'http://localhost:3001';
 
 // -----------------  Users
@@ -63,4 +64,14 @@ export async function addNewPhoto(photo) {
   } catch (error) {
     console.log(error);
   }
+}
+
+// -----------------  Unsplash API
+
+export async function getPhotosByQuery(query) {
+  const { data } = await axios.get(
+    `${UNSPLASH_ROOT}/search/photos?query=${query}&client_id=${clientId}&per_page=3`
+  );
+  console.log('APISERVICE', data);
+  return data;
 }

@@ -2,11 +2,11 @@ import Images from './Images';
 import './styles/imagesList.css';
 import PropTypes from 'prop-types';
 
-export default function ImagesGrid({ userPhotos }) {
+export default function ImagesGrid({ photos }) {
   return (
     <div className="userGridImages">
       <div className="containerImages">
-        {userPhotos.map((photo) => (
+        {photos.map((photo) => (
           <Images photo={photo} key={photo.id} />
         ))}
       </div>
@@ -15,7 +15,7 @@ export default function ImagesGrid({ userPhotos }) {
 }
 
 ImagesGrid.propTypes = {
-  userPhotos: PropTypes.arrayOf(
+  photos: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
     })

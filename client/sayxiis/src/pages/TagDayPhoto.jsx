@@ -1,8 +1,28 @@
+import { useEffect, useState } from 'react';
+import { getPhotosByQuery } from '../../apiService';
 import Button from '../components/Button';
 import InputPhoto from '../components/InputPhoto';
+import randomTag from '../util/randomTag';
 import './styles/tagDayPhoto.css';
 
-export default function TagDayPhoto() {
+export default function TagDayPhoto({ setPhotos }) {
+  const [photos, setPhotosState] = useState([]);
+  const tags = ['sky', 'dog', 'cat', 'food', 'work', 'flower', 'nature'];
+  const tagDay = randomTag(tags);
+
+  useEffect(() => {
+    async function fetchPhotos() {
+      try {
+        const data = await getPhotosByQuery(tagDay);
+        setPhotosState(data.results);
+      } catch (error) {
+        console.error('Error fetching photos:', error);
+      }
+    }
+
+    fetchPhotos();
+  }, [tagDay]);
+
   return (
     <div className="competion">
       <div className="competionHeader">
@@ -16,7 +36,7 @@ export default function TagDayPhoto() {
               Today tag: <span className="tag">#Sky</span>
             </p>
           </div>
-          <InputPhoto />
+          <InputPhoto setPhotos={setPhotos} />
         </div>
       </div>
       <div className="section">
@@ -25,21 +45,14 @@ export default function TagDayPhoto() {
 
       <div className="photosCompetionsList">
         <div className="examplesPhotosCompetion">
-          <img
-            className="photoTag"
-            alt="user image photo"
-            src="https://images.unsplash.com/photo-1508020963102-c6c723be5764?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80"
-          />
-          <img
-            className="photoTag"
-            alt="user image photo"
-            src="https://images.unsplash.com/photo-1514477917009-389c76a86b68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2567&q=80"
-          />
-          <img
-            className="photoTag"
-            alt="user image photo"
-            src="https://images.unsplash.com/photo-1544829728-e5cb9eedc20e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80"
-          />
+          {photos.map((photo) => (
+            <img
+              key={photo.id}
+              className="photoTag"
+              alt={photo.alt_description}
+              src={photo.urls.small}
+            />
+          ))}
         </div>
       </div>
 
