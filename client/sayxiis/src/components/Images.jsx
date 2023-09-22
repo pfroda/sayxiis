@@ -1,5 +1,4 @@
 import './styles/images.css';
-import PropTypes from 'prop-types';
 
 export default function Images({ photo }) {
   return (
@@ -16,9 +15,3 @@ export default function Images({ photo }) {
     </div>
   );
 }
-
-Images.propTypes = {
-  photo: PropTypes.shape({
-    photoUrl: PropTypes.string.isRequired,
-  }).isRequired,
-};

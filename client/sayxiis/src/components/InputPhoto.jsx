@@ -1,38 +1,6 @@
 import './styles/inputPhoto.css';
-import axios from 'axios';
-import { addNewPhoto } from '../../apiService';
 
-export default function ButtonPhoto({ setPhotos }) {
-  const uploadPhoto = (files) => {
-    console.log(files[0]);
-    const formData = new FormData();
-    formData.append('file', files[0]);
-    formData.append('upload_preset', 'xqpgfjad');
-
-    axios
-      .post('https://api.cloudinary.com/v1_1/drkdtdojo/image/upload', formData)
-      .then((res) => {
-        console.log(res);
-      });
-  };
-
-  function handleUpload(file) {
-    file.preventDefault();
-
-    const newPhoto = {
-      ownerId: 1,
-      photoUrl: file.target.photoUrl.value,
-    };
-
-    addNewPhoto(newPhoto).then((photo) => {
-      setPhotos((prev) => {
-        const updatePhotos = [...prev, photo];
-        console.log(updatePhotos);
-        return updatePhotos;
-      });
-    });
-  }
-
+export default function ButtonPhoto({ uploadPhoto }) {
   return (
     <div>
       <div>
@@ -43,6 +11,7 @@ export default function ButtonPhoto({ setPhotos }) {
           onChange={(e) => {
             uploadPhoto(e.target.files);
           }}
+          name="urlPhoto"
           className="inputPhoto"
           id="files"
           type="file"

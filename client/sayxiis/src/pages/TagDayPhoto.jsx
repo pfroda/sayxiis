@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import { getPhotosByQuery } from '../../apiService';
+import { addNewPhoto, getPhotosByQuery } from '../../apiService';
+import { Image } from 'cloudinary-react';
+import axios from 'axios';
 import Button from '../components/Button';
 import InputPhoto from '../components/InputPhoto';
 import randomTag from '../util/randomTag';
@@ -7,8 +9,45 @@ import './styles/tagDayPhoto.css';
 
 export default function TagDayPhoto({ setPhotos }) {
   const [photos, setPhotosState] = useState([]);
-  const tags = ['sky', 'dog', 'cat', 'food', 'work', 'flower', 'nature'];
+  const [photoSelected, setPhotoSelected] = useState('');
+
+  const tags = [
+    'sky',
+    'dog',
+    'cat',
+    'food',
+    'work',
+    'flower',
+    'nature',
+    'panda',
+  ];
   const tagDay = randomTag(tags);
+
+  const uploadPhoto = (files) => {
+    const formData = new FormData();
+    formData.append('file', files[0]);
+    formData.append('upload_preset', 'xqpgfjad');
+
+    axios
+      .post('https://api.cloudinary.com/v1_1/drkdtdojo/image/upload', formData)
+      .then((res) => {
+        savePhotoOnDB(res.data.url);
+      });
+  };
+
+  function savePhotoOnDB(file) {
+    const newPhoto = {
+      ownerId: 1,
+      photoUrl: file,
+    };
+
+    addNewPhoto(newPhoto).then((photo) => {
+      setPhotos((prev) => {
+        const updatePhotos = [photo, ...prev];
+        return updatePhotos;
+      });
+    });
+  }
 
   useEffect(() => {
     async function fetchPhotos() {
@@ -33,10 +72,10 @@ export default function TagDayPhoto({ setPhotos }) {
               <span className="timer">12:00</span> until reset this tag
             </p>
             <p className="text competionTag">
-              Today tag: <span className="tag">#Sky</span>
+              Today tag: <span className="tag">#{tagDay}</span>
             </p>
           </div>
-          <InputPhoto setPhotos={setPhotos} />
+          <InputPhoto setPhotos={setPhotos} uploadPhoto={uploadPhoto} />
         </div>
       </div>
       <div className="section">
@@ -65,10 +104,10 @@ export default function TagDayPhoto({ setPhotos }) {
       <div className="listUserPhotos">
         <div className="containerImagesTag">
           <div className="cardTag">
-            <img
-              alt="user image photo"
-              src="https://images.unsplash.com/photo-1544829728-e5cb9eedc20e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80"
-            />
+            <Image
+              cloudName="drkdtdojo"
+              publicId="https://res.cloudinary.com/drkdtdojo/image/upload/v1695388090/bs95ls3slur9yrlpnax2.jpg"
+            ></Image>
             <div className="infoTag">
               <h1>@userName</h1>
               <p className="btnTag">
@@ -78,10 +117,10 @@ export default function TagDayPhoto({ setPhotos }) {
           </div>
 
           <div className="cardTag">
-            <img
-              alt="user image photo"
-              src="https://images.unsplash.com/photo-1544829728-e5cb9eedc20e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80"
-            />
+            <Image
+              cloudName="drkdtdojo"
+              publicId="https://res.cloudinary.com/drkdtdojo/image/upload/v1695388090/bs95ls3slur9yrlpnax2.jpg"
+            ></Image>
             <div className="infoTag">
               <h1>@userName</h1>
               <p className="btnTag">
@@ -91,10 +130,10 @@ export default function TagDayPhoto({ setPhotos }) {
           </div>
 
           <div className="cardTag">
-            <img
-              alt="user image photo"
-              src="https://images.unsplash.com/photo-1544829728-e5cb9eedc20e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80"
-            />
+            <Image
+              cloudName="drkdtdojo"
+              publicId="https://res.cloudinary.com/drkdtdojo/image/upload/v1695388090/bs95ls3slur9yrlpnax2.jpg"
+            ></Image>
             <div className="infoTag">
               <h1>@userName</h1>
               <p className="btnTag">

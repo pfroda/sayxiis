@@ -2,9 +2,8 @@ import Button from './Button';
 import InputPhoto from './InputPhoto';
 import './styles/userHeader.css';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
-export default function UserHeader({ user }) {
+export default function UserHeader({ user, uploadPhoto }) {
   return (
     <div className="userHeader">
       <div className="userContainer">
@@ -22,7 +21,7 @@ export default function UserHeader({ user }) {
           <p className="text userDescription">{user.intro}</p>
         </div>
 
-        <InputPhoto />
+        <InputPhoto uploadPhoto={uploadPhoto} />
       </div>
       <div className="userButtons">
         <Button title={'Follow'} />
@@ -35,14 +34,3 @@ export default function UserHeader({ user }) {
     </div>
   );
 }
-
-UserHeader.propTypes = {
-  user: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    username: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    surname: PropTypes.string.isRequired,
-    intro: PropTypes.string.isRequired,
-    profilePicture: PropTypes.string.isRequired,
-  }).isRequired,
-};

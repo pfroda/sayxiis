@@ -1,6 +1,5 @@
 import Images from './Images';
 import './styles/imagesList.css';
-import PropTypes from 'prop-types';
 
 export default function ImagesGrid({ photos }) {
   return (
@@ -13,11 +12,3 @@ export default function ImagesGrid({ photos }) {
     </div>
   );
 }
-
-ImagesGrid.propTypes = {
-  photos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-    })
-  ).isRequired,
-};

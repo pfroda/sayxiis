@@ -1,14 +1,44 @@
+import { useState } from 'react';
+import { addNewPhoto } from '../../apiService';
 import ImagesGrid from '../components/ImagesGrid';
 import UserHeader from '../components/UserHeader';
 import './styles/userProfile.css';
-import PropTypes from 'prop-types';
+import axios from 'axios';
 
-export default function UserProfile({ users, photos }) {
+export default function UserProfile({ users, photos, setPhotos }) {
+  const [photosUpload, setphotosUpload] = useState([]);
+
+  const uploadPhoto = (files) => {
+    const formData = new FormData();
+    formData.append('file', files[0]);
+    formData.append('upload_preset', 'xqpgfjad');
+
+    axios
+      .post('https://api.cloudinary.com/v1_1/drkdtdojo/image/upload', formData)
+      .then((res) => {
+        savePhotoOnDB(res.data.url);
+      });
+  };
+
+  function savePhotoOnDB(file) {
+    const newPhoto = {
+      ownerId: 1,
+      photoUrl: file,
+    };
+
+    addNewPhoto(newPhoto).then((photo) => {
+      setPhotos((prev) => {
+        const updatePhotos = [photo, ...prev];
+        return updatePhotos;
+      });
+    });
+  }
+
   return (
     <div className="userProfile">
       {users.map((user) => (
         <div key={user.id}>
-          <UserHeader user={user} />
+          <UserHeader user={user} uploadPhoto={uploadPhoto} />
         </div>
       ))}
 
@@ -16,18 +46,3 @@ export default function UserProfile({ users, photos }) {
     </div>
   );
 }
-
-// Define propTypes for the 'users and photos' prop
-UserProfile.propTypes = {
-  users: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-    })
-  ).isRequired,
-
-  photos: PropTypes.arrayOf(
-    PropTypes.shape({
-      photoUrl: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
