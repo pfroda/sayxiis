@@ -1,5 +1,6 @@
 import Button from '../components/Button';
 import ButtonPhoto from '../components/ButtonPhoto';
+import InputPhoto from '../components/InputPhoto';
 import './styles/tagDayPhoto.css';
 
 export default function TagDayPhoto() {
@@ -16,7 +17,7 @@ export default function TagDayPhoto() {
               Today tag: <span className="tag">#Sky</span>
             </p>
           </div>
-          <ButtonPhoto />
+          <InputPhoto />
         </div>
       </div>
       <div className="section">

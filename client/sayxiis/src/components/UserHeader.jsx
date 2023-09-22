@@ -1,6 +1,7 @@
 import Button from './Button';
-import ButtonPhoto from './ButtonPhoto';
+import InputPhoto from './InputPhoto';
 import './styles/userHeader.css';
+import { Link } from 'react-router-dom';
 
 export default function UserHeader({ user }) {
   return (
@@ -19,12 +20,16 @@ export default function UserHeader({ user }) {
           </h3>
           <p className="text userDescription">{user.intro}</p>
         </div>
-        <ButtonPhoto />
+
+        <InputPhoto />
       </div>
       <div className="userButtons">
         <Button title={'Follow'} />
         <Button title={'🏆 Stickers'} />
-        <Button title={'Day Tag'} />
+        <Link to="/tagdayphoto">
+          {' '}
+          <Button title={'Day Tag'} />
+        </Link>
       </div>
     </div>
   );
