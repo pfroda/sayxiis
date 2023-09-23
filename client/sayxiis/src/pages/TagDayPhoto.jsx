@@ -1,26 +1,19 @@
 import { useEffect, useState } from 'react';
 import { addNewPhoto, getPhotosByQuery } from '../../apiService';
-import { Image } from 'cloudinary-react';
 import axios from 'axios';
 import Button from '../components/Button';
 import InputPhoto from '../components/InputPhoto';
-import randomTag from '../util/randomTag';
+import randomTag, { Tags } from '../util/randomTag';
 import './styles/tagDayPhoto.css';
+import '../components/styles/imagesList.css';
+import Images from '../components/Images';
 
 export default function TagDayPhoto({ setPhotos }) {
   const [photos, setPhotosState] = useState([]);
+  const [photosDay, setPhotosDay] = useState([]);
 
-  const tags = [
-    'sky',
-    'dog',
-    'cat',
-    'food',
-    'work',
-    'flower',
-    'nature',
-    'panda',
-  ];
-  const tagDay = randomTag(tags);
+  const tag = Tags;
+  const tagDay = randomTag(tag);
 
   const uploadPhoto = (files) => {
     const formData = new FormData();
@@ -45,6 +38,10 @@ export default function TagDayPhoto({ setPhotos }) {
         const updatePhotos = [photo, ...prev];
         return updatePhotos;
       });
+      setPhotosDay((prev) => {
+        const updatePhotos = [photo, ...prev];
+        return updatePhotos;
+      });
     });
   }
 
@@ -62,7 +59,7 @@ export default function TagDayPhoto({ setPhotos }) {
   }, [tagDay]);
 
   return (
-    <div className="competion">
+    <div className="tagDayPhoto">
       <div className="competionHeader">
         <div className="headerBody">
           <h1 className="tagTitle">Today tag theme</h1>
@@ -78,7 +75,9 @@ export default function TagDayPhoto({ setPhotos }) {
         </div>
       </div>
       <div className="section">
-        <Button title={'Examples'} />
+        <div className="buttons">
+          <Button title={'Examples'} />
+        </div>
       </div>
 
       <div className="photosCompetionsList">
@@ -100,45 +99,15 @@ export default function TagDayPhoto({ setPhotos }) {
           <Button title={'See more'} />
         </div>
       </div>
-      <div className="listUserPhotos">
-        <div className="containerImagesTag">
-          <div className="cardTag">
-            <Image
-              cloudName="drkdtdojo"
-              publicId="https://res.cloudinary.com/drkdtdojo/image/upload/v1695388090/bs95ls3slur9yrlpnax2.jpg"
-            ></Image>
-            <div className="infoTag">
-              <h1>@userName</h1>
-              <p className="btnTag">
-                VOTE <span className="counterTag">0</span>
-              </p>
-            </div>
-          </div>
-
-          <div className="cardTag">
-            <Image
-              cloudName="drkdtdojo"
-              publicId="https://res.cloudinary.com/drkdtdojo/image/upload/v1695388090/bs95ls3slur9yrlpnax2.jpg"
-            ></Image>
-            <div className="infoTag">
-              <h1>@userName</h1>
-              <p className="btnTag">
-                VOTE <span className="counterTag">0</span>
-              </p>
-            </div>
-          </div>
-
-          <div className="cardTag">
-            <Image
-              cloudName="drkdtdojo"
-              publicId="https://res.cloudinary.com/drkdtdojo/image/upload/v1695388090/bs95ls3slur9yrlpnax2.jpg"
-            ></Image>
-            <div className="infoTag">
-              <h1>@userName</h1>
-              <p className="btnTag">
-                VOTE <span className="counterTag">0</span>
-              </p>
-            </div>
+      {/* ----------- Users day photos ---------- */}
+      <div className="dayPhotos">
+        <div className="userGridImages">
+          <div className="containerImages">
+            {photosDay.length === 0 ? (
+              <p className="noPhotos">No photos yet!</p>
+            ) : (
+              photosDay.map((photo) => <Images photo={photo} key={photo.id} />)
+            )}{' '}
           </div>
         </div>
       </div>

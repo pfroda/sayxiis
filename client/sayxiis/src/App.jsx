@@ -12,7 +12,6 @@ function App() {
   useEffect(() => {
     getAllUsers()
       .then((res) => {
-        console.log('users', res[0].username);
         setUsers(res);
       })
       .catch((error) => {
@@ -33,7 +32,6 @@ function App() {
   useEffect(() => {
     getAllUserPhoto()
       .then((res) => {
-        console.log('res', res.photo);
         setPhotos(res.photo);
       })
       .catch((error) => {

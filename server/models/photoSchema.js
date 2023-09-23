@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     photoUrl: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     winSticker: {
       type: DataTypes.BOOLEAN,

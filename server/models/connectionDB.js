@@ -24,7 +24,7 @@ db.userProfileSchema = require('./userProfileSchema')(
   Sequelize.DataTypes
 );
 
-db.sequelize.sync({ force: false, logging: console.log }).then(() => {
+db.sequelize.sync({ force: false }).then(() => {
   console.log('Re-sync done on DB 📑!');
 });
 

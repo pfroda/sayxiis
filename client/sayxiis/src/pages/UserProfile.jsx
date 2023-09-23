@@ -1,5 +1,4 @@
 import { addNewPhoto } from '../../apiService';
-import ImagesGrid from '../components/ImagesGrid';
 import ListUserPhotos from '../components/ListUserPhotos';
 import UserHeader from '../components/UserHeader';
 import './styles/userProfile.css';
@@ -39,8 +38,6 @@ export default function UserProfile({ users, photos, setPhotos }) {
           <UserHeader user={user} uploadPhoto={uploadPhoto} />
         </div>
       ))}
-
-      {/* <ImagesGrid users={users} photos={photos} /> */}
       <ListUserPhotos users={users} photos={photos} />
     </div>
   );
