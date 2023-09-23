@@ -35,6 +35,17 @@ export async function getAllPhotosDb() {
   }
 }
 
+export async function getAllUserPhoto() {
+  try {
+    const response = await fetch(`${url}/users/photos/1`);
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function addNewPhoto(photo) {
   try {
     const response = await fetch(`${url}/photos`, {
@@ -43,7 +54,7 @@ export async function addNewPhoto(photo) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        ownerId: photo.ownerId,
+        userId: photo.userId,
         vote: photo.vote,
         photoUrl: photo.photoUrl,
       }),

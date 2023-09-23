@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import UserProfile from './pages/UserProfile';
-import { getAllPhotosDb, getAllUsers } from '../apiService';
+import { getAllPhotosDb, getAllUserPhoto, getAllUsers } from '../apiService';
 import TagDayPhoto from './pages/TagDayPhoto';
 import { Routes, Route } from 'react-router-dom';
 
@@ -19,10 +19,21 @@ function App() {
       });
   }, []);
 
+  // useEffect(() => {
+  //   getAllPhotosDb()
+  //     .then((res) => {
+  //       setPhotos(res);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching user photos:', error);
+  //     });
+  // }, []);
+
   useEffect(() => {
-    getAllPhotosDb()
+    getAllUserPhoto()
       .then((res) => {
-        setPhotos(res);
+        console.log('res', res.photo);
+        setPhotos(res.photo);
       })
       .catch((error) => {
         console.error('Error fetching user photos:', error);

@@ -1,5 +1,6 @@
 const db = require('../models/connectionDB');
 const userProfile = db.userProfileSchema;
+const photosDb = db.photoSchema;
 
 async function getAllUsers(req, res) {
   try {
@@ -62,10 +63,32 @@ async function deleteUser(req, res) {
   }
 }
 
+async function getAllUserPhoto(req, res) {
+  const id = req.params.id;
+  try {
+    const userPhotos = await userProfile.findOne({
+      include: [
+        {
+          model: photosDb,
+          as: 'photo',
+        },
+      ],
+      where: { id: id },
+      order: [['photo', 'createdAt', 'DESC']],
+    });
+    res.send(userPhotos);
+    res.status(200);
+  } catch (error) {
+    console.log(error);
+    res.status(500);
+  }
+}
+
 module.exports = {
   getAllUsers,
   addUser,
   getAllUserById,
   updateUser,
   deleteUser,
+  getAllUserPhoto,
 };

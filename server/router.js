@@ -11,6 +11,7 @@ router.delete('/photos/:id', photoController.deletePhoto);
 
 // User Router
 router.get('/users', userController.getAllUsers);
+router.get('/users/photos/:id', userController.getAllUserPhoto);
 router.get('/users/:id', userController.getAllUserById);
 router.post('/users', userController.addUser);
 router.put('/users/:id', userController.updateUser);
