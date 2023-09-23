@@ -1,4 +1,5 @@
-const userProfile = require('../models/userProfileSchema');
+const db = require('../models/connectionDB');
+const userProfile = db.userProfileSchema;
 
 async function getAllUsers(req, res) {
   try {

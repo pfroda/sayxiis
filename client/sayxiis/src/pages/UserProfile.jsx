@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { addNewPhoto } from '../../apiService';
 import ImagesGrid from '../components/ImagesGrid';
 import UserHeader from '../components/UserHeader';
@@ -6,8 +5,6 @@ import './styles/userProfile.css';
 import axios from 'axios';
 
 export default function UserProfile({ users, photos, setPhotos }) {
-  const [photosUpload, setphotosUpload] = useState([]);
-
   const uploadPhoto = (files) => {
     const formData = new FormData();
     formData.append('file', files[0]);
@@ -22,7 +19,7 @@ export default function UserProfile({ users, photos, setPhotos }) {
 
   function savePhotoOnDB(file) {
     const newPhoto = {
-      ownerId: 1,
+      userId: 1,
       photoUrl: file,
     };
 

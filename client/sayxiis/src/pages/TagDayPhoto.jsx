@@ -9,7 +9,6 @@ import './styles/tagDayPhoto.css';
 
 export default function TagDayPhoto({ setPhotos }) {
   const [photos, setPhotosState] = useState([]);
-  const [photoSelected, setPhotoSelected] = useState('');
 
   const tags = [
     'sky',
@@ -37,7 +36,7 @@ export default function TagDayPhoto({ setPhotos }) {
 
   function savePhotoOnDB(file) {
     const newPhoto = {
-      ownerId: 1,
+      userId: 1,
       photoUrl: file,
     };
 

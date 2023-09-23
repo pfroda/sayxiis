@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize');
 require('dotenv').config();
+const { Sequelize, DataTypes } = require('sequelize');
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -13,4 +13,30 @@ const sequelize = new Sequelize(
   }
 );
 
-module.exports = sequelize;
+const db = {};
+
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+
+db.photoSchema = require('./photoSchema')(sequelize, DataTypes);
+db.userProfileSchema = require('./userProfileSchema')(
+  sequelize,
+  Sequelize.DataTypes
+);
+
+db.sequelize.sync({ force: false, logging: console.log }).then(() => {
+  console.log('Re-sync done on DB 📑!');
+});
+
+// 1 to many relation
+db.userProfileSchema.hasMany(db.photoSchema, {
+  foreignKey: 'userId',
+  as: 'photo',
+});
+
+db.photoSchema.belongsTo(db.userProfileSchema, {
+  foreignKey: 'userId',
+  as: 'user',
+});
+
+module.exports = db;

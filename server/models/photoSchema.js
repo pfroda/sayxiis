@@ -1,17 +1,17 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('./connectionDB');
+module.exports = (sequelize, DataTypes) => {
+  const Photos = sequelize.define('photosdb', {
+    vote: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+    photoUrl: {
+      type: DataTypes.STRING,
+    },
+    winSticker: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+  });
 
-const Photos = sequelize.define('photosdb', {
-  ownerId: {
-    type: DataTypes.INTEGER,
-  },
-  vote: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
-  },
-  photoUrl: {
-    type: DataTypes.STRING,
-  },
-});
-
-module.exports = Photos;
+  return Photos;
+};

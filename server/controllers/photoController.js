@@ -1,8 +1,11 @@
-const photosDb = require('../models/photoSchema');
+const db = require('../models/connectionDB');
+const photosDb = db.photoSchema;
 
 async function getAllPhotos(req, res) {
   try {
-    const users = await photosDb.findAll();
+    const users = await photosDb.findAll({
+      order: [['createdAt', 'DESC']],
+    });
     res.send(users);
     res.status(200);
   } catch (error) {
