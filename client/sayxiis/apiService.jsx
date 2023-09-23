@@ -39,7 +39,6 @@ export async function getAllUserPhoto() {
   try {
     const response = await fetch(`${url}/users/photos/1`);
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.log(error);
@@ -85,7 +84,6 @@ export const uploadPhoto = (files) => {
   axios
     .post('https://api.cloudinary.com/v1_1/drkdtdojo/image/upload', formData)
     .then((res) => {
-      console.log('From uploadPhoto', res.data.url);
       return res.data.url;
     });
 };

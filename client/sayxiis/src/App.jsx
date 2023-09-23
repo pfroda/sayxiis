@@ -12,6 +12,7 @@ function App() {
   useEffect(() => {
     getAllUsers()
       .then((res) => {
+        console.log('users', res[0].username);
         setUsers(res);
       })
       .catch((error) => {
@@ -45,7 +46,9 @@ function App() {
       <Routes>
         <Route
           path="/tagdayphoto"
-          element={<TagDayPhoto photos={photos} setPhotos={setPhotos} />}
+          element={
+            <TagDayPhoto users={users} photos={photos} setPhotos={setPhotos} />
+          }
         />
         <Route
           path="/"
