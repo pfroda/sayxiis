@@ -8,6 +8,7 @@ router.get('/photos', photoController.getAllPhotos);
 router.get('/photos/:id', photoController.getPhotoById);
 router.post('/photos', photoController.addPhoto);
 router.delete('/photos/:id', photoController.deletePhoto);
+router.put('/photos/:id/vote', photoController.votePhoto);
 
 // User Router
 router.get('/users', userController.getAllUsers);

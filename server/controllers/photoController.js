@@ -53,4 +53,27 @@ async function deletePhoto(req, res) {
   }
 }
 
-module.exports = { getAllPhotos, addPhoto, deletePhoto, getPhotoById };
+async function votePhoto(req, res) {
+  try {
+    const photoId = req.params.id;
+    const votePhoto = await photosDb.findByPk(photoId);
+    if (votePhoto) {
+      votePhoto.vote = votePhoto.vote + 1;
+      await votePhoto.save();
+      res.status(200).send('1 vote more!');
+    } else {
+      res.status(404).send('Photo not found');
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal server error');
+  }
+}
+
+module.exports = {
+  votePhoto,
+  getAllPhotos,
+  addPhoto,
+  deletePhoto,
+  getPhotoById,
+};
