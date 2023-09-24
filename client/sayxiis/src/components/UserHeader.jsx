@@ -1,9 +1,16 @@
+import { useState } from 'react';
 import Button from './Button';
 import InputPhoto from './InputPhoto';
 import './styles/userHeader.css';
 import { Link } from 'react-router-dom';
 
 export default function UserHeader({ user, uploadPhoto }) {
+  const [isFollowed, setIsFollowed] = useState(false);
+
+  const handleClick = () => {
+    setIsFollowed(!isFollowed);
+  };
+
   return (
     <div className="userHeader">
       <div className="userContainer">
@@ -24,7 +31,10 @@ export default function UserHeader({ user, uploadPhoto }) {
         <InputPhoto uploadPhoto={uploadPhoto} />
       </div>
       <div className="userButtons">
-        <Button title={'Follow'} />
+        <Button
+          funcFollow={handleClick}
+          title={isFollowed ? 'Following' : 'Follow'}
+        />
         <Button title={'🏆 Stickers'} />
         <Link to="/tagdayphoto">
           {' '}

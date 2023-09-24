@@ -1,9 +1,11 @@
 import './styles/button.css';
 
-export default function Button({ title }) {
+export default function Button({ title, funcFollow }) {
   return (
     <div>
-      <button className="mainButton">{title}</button>
+      <button onClick={funcFollow} className="mainButton">
+        {title}
+      </button>
     </div>
   );
 }

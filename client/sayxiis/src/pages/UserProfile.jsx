@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { addNewPhoto } from '../../apiService';
 import ListUserPhotos from '../components/ListUserPhotos';
 import UserHeader from '../components/UserHeader';
@@ -38,7 +39,7 @@ export default function UserProfile({ users, photos, setPhotos }) {
           <UserHeader user={user} uploadPhoto={uploadPhoto} />
         </div>
       ))}
-      <ListUserPhotos users={users} photos={photos} />
+      <ListUserPhotos setPhotos={setPhotos} users={users} photos={photos} />
     </div>
   );
 }

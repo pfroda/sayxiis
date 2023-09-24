@@ -65,9 +65,38 @@ export async function addNewPhoto(photo) {
   }
 }
 
+export async function deletePhoto(id) {
+  try {
+    const response = await fetch(`${url}/photos/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to delete photo. Status code: ${response.status}`
+      );
+    }
+    return { success: true };
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function upVotePhoto(id) {
   try {
     const response = await fetch(`${url}/photos/${id}/vote`, {
+      method: 'PUT',
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function winSticker(id) {
+  try {
+    const response = await fetch(`${url}/photos/${id}/sticker`, {
       method: 'PUT',
     });
     const data = await response.json();
