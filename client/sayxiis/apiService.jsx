@@ -65,6 +65,18 @@ export async function addNewPhoto(photo) {
   }
 }
 
+export async function upVotePhoto(id) {
+  try {
+    const response = await fetch(`${url}/photos/${id}/vote`, {
+      method: 'PUT',
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // -----------------  Unsplash API
 
 export async function getPhotosByQuery(query) {

@@ -1,9 +1,20 @@
-import moment from 'moment';
+// import moment from 'moment';
 
-moment().format();
+// export function countDown() {
+//   let startdate = moment();
+//   startdate = startdate.subtract(1, 'days');
+//   startdate = startdate.format('hh:mm:ss');
+//   return startdate;
+// }
 
-export default function timerCounter() {
-  const time = Date();
+// export function timerCounter() {
+//   const time = Date();
+//   let newTime = moment(time).format('hh:mm');
+//   let resetTag = 'false';
 
-  return time;
-}
+//   if (newTime === '17:44') {
+//     resetTag = 'true';
+//   }
+
+//   return resetTag;
+// }

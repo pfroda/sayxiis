@@ -54,25 +54,38 @@
 
 /* --------  List of example photos  ---------- */
 
-.photoTag {
-  width: 250px;
-  height: 200px;
-  border-radius: 2px;
-  object-fit: cover;
-  cursor: pointer;
-}
-
 .photosCompetionsList {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 100%; */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .examplesPhotosCompetion {
-  display: flex;
-  width: 70%;
-  justify-content: space-evenly;
+  /* display: flex; */
+  /* width: 70%; */
+  /* display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(228px, 1fr));
+  grid-auto-rows: 240px;
+  justify-self: center; */
+
+  display: grid;
+  grid-template-columns: repeat(3, 240px);
+  grid-template-rows: repeat(auto-fill, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 10px;
+}
+
+.photoTag {
+  width: 230px;
+  height: 230px;
+  border-radius: 2px;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
 /* --------  List of users photos  ---------- */
