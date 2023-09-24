@@ -70,7 +70,25 @@ async function votePhoto(req, res) {
   }
 }
 
+async function winSticker(req, res) {
+  try {
+    const photoId = req.params.id;
+    const winPhoto = await photosDb.findByPk(photoId);
+    if (winPhoto) {
+      winPhoto.winSticker = true;
+      await winPhoto.save();
+      res.status(200).send('Now this photo has a win sticker');
+    } else {
+      res.status(404).send('Photo not found');
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal server error');
+  }
+}
+
 module.exports = {
+  winSticker,
   votePhoto,
   getAllPhotos,
   addPhoto,

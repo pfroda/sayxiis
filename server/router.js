@@ -9,6 +9,7 @@ router.get('/photos/:id', photoController.getPhotoById);
 router.post('/photos', photoController.addPhoto);
 router.delete('/photos/:id', photoController.deletePhoto);
 router.put('/photos/:id/vote', photoController.votePhoto);
+router.put('/photos/:id/sticker', photoController.winSticker);
 
 // User Router
 router.get('/users', userController.getAllUsers);
