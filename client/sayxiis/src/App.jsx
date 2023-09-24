@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import './App.css';
-import UserProfile from './pages/UserProfile';
-import { getAllPhotosDb, getAllUserPhoto, getAllUsers } from '../apiService';
-import TagDayPhoto from './pages/TagDayPhoto';
 import { Routes, Route } from 'react-router-dom';
+import { getAllUsers } from './api/userServices';
+import { getAllUserPhoto } from './api/photosService';
+import UserProfile from './pages/UserProfile';
+import TagDayPhoto from './pages/TagDayPhoto';
 import Home from './pages/Home';
+import './App.css';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -20,19 +21,10 @@ function App() {
       });
   }, []);
 
-  // useEffect(() => {
-  //   getAllPhotosDb()
-  //     .then((res) => {
-  //       setPhotos(res);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching user photos:', error);
-  //     });
-  // }, []);
-
   useEffect(() => {
     getAllUserPhoto()
       .then((res) => {
+        console.log(res);
         setPhotos(res.photo);
       })
       .catch((error) => {

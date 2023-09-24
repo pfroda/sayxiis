@@ -1,21 +1,14 @@
-import { useState } from 'react';
-import { addNewPhoto } from '../../apiService';
+import { uploadPhotoToCloudinary } from '../api/cloudinaryService';
+import { addNewPhoto } from '../api/photosService';
 import ListUserPhotos from '../components/ListUserPhotos';
 import UserHeader from '../components/UserHeader';
 import './styles/userProfile.css';
-import axios from 'axios';
 
 export default function UserProfile({ users, photos, setPhotos }) {
   const uploadPhoto = (files) => {
-    const formData = new FormData();
-    formData.append('file', files[0]);
-    formData.append('upload_preset', 'xqpgfjad');
-
-    axios
-      .post('https://api.cloudinary.com/v1_1/drkdtdojo/image/upload', formData)
-      .then((res) => {
-        savePhotoOnDB(res.data.url);
-      });
+    uploadPhotoToCloudinary(files[0]).then((res) => {
+      savePhotoOnDB(res.data.url);
+    });
   };
 
   function savePhotoOnDB(file) {

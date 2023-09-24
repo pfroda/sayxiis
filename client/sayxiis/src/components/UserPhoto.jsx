@@ -1,12 +1,8 @@
 // import { useState } from 'react';
-import { deletePhoto } from '../../apiService';
+import { deletePhoto } from '../api/photosService';
 import './styles/images.css';
-import ImageModal from './ImageModal';
 
 export default function UserPhoto({ photo, setPhotos }) {
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [fullImageUrl, setFullImageUrl] = useState('');
-
   function handleDelete() {
     deletePhoto(photo.id).then(() => {
       setPhotos((prev) => {
@@ -15,17 +11,6 @@ export default function UserPhoto({ photo, setPhotos }) {
       });
     });
   }
-
-  // function openModal() {
-  //   console.log('open modal');
-  //   setIsModalOpen(true);
-  //   setFullImageUrl(photo.photoUrl);
-  // }
-
-  // function closeModal() {
-  //   console.log('clicked');
-  //   setIsModalOpen(false);
-  // }
 
   return (
     <div className="card">
@@ -38,9 +23,6 @@ export default function UserPhoto({ photo, setPhotos }) {
           Delete photo
         </p>
       </div>
-      {/* {isModalOpen && (
-        <ImageModal imageUrl={photo.photoUrl} onClose={closeModal} />
-      )} */}
     </div>
   );
 }

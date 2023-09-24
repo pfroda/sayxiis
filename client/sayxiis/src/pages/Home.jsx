@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import './styles/home.css';
 import { useEffect, useState } from 'react';
-import { getPhotosByQuery } from '../../apiService';
+import { getPhotosByQuery } from '../api/unsplashService';
+import './styles/home.css';
 
 export default function Home() {
   const [photosR, setPhotosR] = useState([]);

@@ -1,30 +1,25 @@
 import { useEffect, useState } from 'react';
-import { addNewPhoto, getPhotosByQuery } from '../../apiService';
-import axios from 'axios';
+import { uploadPhotoToCloudinary } from '../api/cloudinaryService';
+import { addNewPhoto } from '../api/photosService';
+import { getPhotosByQuery } from '../api/unsplashService';
 import Button from '../components/Button';
 import InputPhoto from '../components/InputPhoto';
 import randomTag, { Tags } from '../util/randomTag';
+import Images from '../components/Images';
 import './styles/tagDayPhoto.css';
 import '../components/styles/imagesList.css';
-import Images from '../components/Images';
 
-export default function TagDayPhoto({ setPhotos }) {
-  const [photos, setPhotosState] = useState([]);
+export default function TagDayPhoto({ setPhotos, users }) {
+  const [examplesPhotos, setExamplesPhotos] = useState([]);
   const [photosDay, setPhotosDay] = useState([]);
 
   const tag = Tags;
   const tagDay = randomTag(tag);
 
   const uploadPhoto = (files) => {
-    const formData = new FormData();
-    formData.append('file', files[0]);
-    formData.append('upload_preset', 'xqpgfjad');
-
-    axios
-      .post('https://api.cloudinary.com/v1_1/drkdtdojo/image/upload', formData)
-      .then((res) => {
-        savePhotoOnDB(res.data.url);
-      });
+    uploadPhotoToCloudinary(files[0]).then((res) => {
+      savePhotoOnDB(res.data.url);
+    });
   };
 
   function savePhotoOnDB(file) {
@@ -49,7 +44,7 @@ export default function TagDayPhoto({ setPhotos }) {
     async function fetchPhotos() {
       try {
         const data = await getPhotosByQuery(tagDay, 3);
-        setPhotosState(data.results);
+        setExamplesPhotos(data.results);
       } catch (error) {
         console.error('Error fetching photos:', error);
       }
@@ -60,6 +55,8 @@ export default function TagDayPhoto({ setPhotos }) {
 
   return (
     <div className="tagDayPhoto">
+      {/* Header page*/}
+
       <div className="competionHeader">
         <div className="headerBody">
           <h1 className="tagTitle">Today tag theme</h1>
@@ -80,9 +77,11 @@ export default function TagDayPhoto({ setPhotos }) {
         </div>
       </div>
 
+      {/* Examples photos*/}
+
       <div className="photosCompetionsList">
         <div className="examplesPhotosCompetion">
-          {photos.map((photo) => (
+          {examplesPhotos.map((photo) => (
             <img
               key={photo.id}
               className="photoTag"
@@ -99,14 +98,23 @@ export default function TagDayPhoto({ setPhotos }) {
           <Button title={'See more'} />
         </div>
       </div>
-      {/* ----------- Users day photos ---------- */}
+
+      {/*  Users day photos */}
+
       <div className="dayPhotos">
         <div className="userGridImages">
           <div className="containerImages">
             {photosDay.length === 0 ? (
               <p className="noPhotos">No photos yet!</p>
             ) : (
-              photosDay.map((photo) => <Images photo={photo} key={photo.id} />)
+              photosDay.map((photo) => (
+                <Images
+                  setPhotos={setPhotos}
+                  users={users}
+                  photo={photo}
+                  key={photo.id}
+                />
+              ))
             )}{' '}
           </div>
         </div>
