@@ -4,6 +4,7 @@ import UserProfile from './pages/UserProfile';
 import { getAllPhotosDb, getAllUserPhoto, getAllUsers } from '../apiService';
 import TagDayPhoto from './pages/TagDayPhoto';
 import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -49,10 +50,14 @@ function App() {
           }
         />
         <Route
-          path="/"
+          path="/profile"
           element={
             <UserProfile users={users} setPhotos={setPhotos} photos={photos} />
           }
+        />
+        <Route
+          path="/"
+          element={<Home users={users} setPhotos={setPhotos} photos={photos} />}
         />
       </Routes>
     </div>

@@ -48,7 +48,7 @@ export default function TagDayPhoto({ setPhotos }) {
   useEffect(() => {
     async function fetchPhotos() {
       try {
-        const data = await getPhotosByQuery(tagDay);
+        const data = await getPhotosByQuery(tagDay, 3);
         setPhotosState(data.results);
       } catch (error) {
         console.error('Error fetching photos:', error);

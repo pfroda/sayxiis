@@ -1,0 +1,98 @@
+.home {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--main--white);
+  position: absolute;
+}
+
+.loggin-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  width: 100%;
+  height: 85%;
+}
+
+.home-title {
+  color: var(--blue--logo);
+  font-size: 5em;
+  z-index: 2;
+}
+
+.loggin-btn {
+  border-radius: 5px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  width: 300px;
+  height: 70px;
+  font-size: 1em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(145, 152, 159, 0.15) 0px 0px 0px 1px;
+  margin-bottom: 15px;
+}
+
+.loggin-btn:hover {
+  transform: translateY(-5px);
+}
+
+.have {
+  background-color: var(--main--brown);
+  color: var(--main--blue);
+}
+
+.start {
+  height: 90px;
+  background-color: var(--main--blue);
+  color: var(--main--brown);
+}
+
+.slogan {
+  width: 20%;
+  font-size: 2em;
+  text-align: center;
+}
+
+.only {
+  font-weight: 700;
+}
+
+.author {
+  text-align: center;
+}
+
+.container-photos {
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  gap: 10px;
+}
+
+.r {
+  transform: rotate(20deg);
+  top: -70px;
+  left: -110px;
+}
+
+.l {
+  transform: rotate(20deg);
+  bottom: -65px;
+  right: -110px;
+}
+
+.photo-home {
+  width: 250px;
+  height: 150px;
+  object-fit: cover;
+  z-index: 3;
+}

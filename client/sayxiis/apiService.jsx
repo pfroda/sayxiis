@@ -108,9 +108,9 @@ export async function winSticker(id) {
 
 // -----------------  Unsplash API
 
-export async function getPhotosByQuery(query) {
+export async function getPhotosByQuery(query, num) {
   const { data } = await axios.get(
-    `${urlUnsplash}/search/photos?query=${query}&client_id=${clientId}&per_page=3`
+    `${urlUnsplash}/search/photos?query=${query}&client_id=${clientId}&per_page=${num}`
   );
   return data;
 }
