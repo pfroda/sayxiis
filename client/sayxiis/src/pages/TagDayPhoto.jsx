@@ -8,13 +8,14 @@ import randomTag, { Tags } from '../util/randomTag';
 import Images from '../components/Images';
 import './styles/tagDayPhoto.css';
 import '../components/styles/imagesList.css';
+import CountdownTimer from '../components/CountdownTimer';
 
 export default function TagDayPhoto({ setPhotos, users }) {
   const [examplesPhotos, setExamplesPhotos] = useState([]);
   const [photosDay, setPhotosDay] = useState([]);
-
   const tag = Tags;
-  const tagDay = randomTag(tag);
+  const [timerReachedZero, setTimerReachedZero] = useState(false);
+  const [tagDay, setTagDay] = useState(randomTag(tag));
 
   const uploadPhoto = (files) => {
     uploadPhotoToCloudinary(files[0]).then((res) => {
@@ -40,18 +41,38 @@ export default function TagDayPhoto({ setPhotos, users }) {
     });
   }
 
+  // useEffect(() => {
+  //   async function fetchPhotos() {
+  //     try {
+  //       const data = await getPhotosByQuery(tagDay, 3);
+  //       setExamplesPhotos(data.results);
+  //     } catch (error) {
+  //       console.error('Error fetching photos:', error);
+  //     }
+  //   }
+
+  //   fetchPhotos();
+  // }, [tagDay]);
+
   useEffect(() => {
     async function fetchPhotos() {
       try {
         const data = await getPhotosByQuery(tagDay, 3);
         setExamplesPhotos(data.results);
+
+        if (timerReachedZero) {
+          // Generate a new tag when the timer reaches zero
+          const newTagDay = randomTag(tag);
+          setTagDay(newTagDay); // Update the tagDay state
+          setTimerReachedZero(false); // Reset the timerReachedZero state
+        }
       } catch (error) {
         console.error('Error fetching photos:', error);
       }
     }
 
     fetchPhotos();
-  }, [tagDay]);
+  }, [tagDay, timerReachedZero]);
 
   return (
     <div className="tagDayPhoto">
@@ -61,9 +82,13 @@ export default function TagDayPhoto({ setPhotos, users }) {
         <div className="headerBody">
           <h1 className="tagTitle">Today tag theme</h1>
           <div className="competionTexts">
-            <p className="text timeCounter">
-              <span className="timer">12:00</span> until reset this tag
-            </p>
+            <div className="text timeCounter">
+              <span className="timer">
+                <CountdownTimer onZero={() => setTimerReachedZero(true)} />
+                <p> Until reset this tag</p>
+              </span>{' '}
+            </div>
+
             <p className="text competionTag">
               Today tag: <span className="tag">#{tagDay}</span>
             </p>

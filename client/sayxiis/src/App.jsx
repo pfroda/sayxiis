@@ -24,7 +24,6 @@ function App() {
   useEffect(() => {
     getAllUserPhoto()
       .then((res) => {
-        console.log(res);
         setPhotos(res.photo);
       })
       .catch((error) => {

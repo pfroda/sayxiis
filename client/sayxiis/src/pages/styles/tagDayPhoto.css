@@ -43,6 +43,12 @@
   font-weight: 700;
 }
 
+.timer {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
 .competionTexts {
   display: flex;
   flex-direction: column;
