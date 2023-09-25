@@ -61,24 +61,12 @@
 /* --------  List of example photos  ---------- */
 
 .photosCompetionsList {
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%; */
-
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .examplesPhotosCompetion {
-  /* display: flex; */
-  /* width: 70%; */
-  /* display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(228px, 1fr));
-  grid-auto-rows: 240px;
-  justify-self: center; */
-
   display: grid;
   grid-template-columns: repeat(3, 240px);
   grid-template-rows: repeat(auto-fill, 1fr);
@@ -89,7 +77,6 @@
 .photoTag {
   width: 230px;
   height: 230px;
-  border-radius: 2px;
   object-fit: cover;
   border-radius: 5px;
 }
@@ -99,4 +86,63 @@
 .dayPhotos {
   align-items: center;
   justify-content: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .examplesPhotosCompetion {
+    grid-template-columns: repeat(3, 130px);
+    grid-template-rows: repeat(auto-fill, 1fr);
+  }
+
+  .photoTag {
+    width: 125px;
+    height: 120px;
+    border-radius: 2px;
+    padding: 0.1rem 0.04rem;
+  }
+
+  .headerBody {
+    width: 100%;
+    padding: 0px 00px 0px 0px;
+    gap: 0px;
+  }
+
+  .section {
+    display: flex;
+    margin: 10px 0 15px 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .buttons {
+    width: 100%;
+    display: flex;
+    gap: 0px;
+    justify-content: space-between;
+  }
+
+  .competionTexts {
+    width: 35%;
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tagTitle {
+    font-size: 1.2rem;
+  }
+
+  .timer {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .competionTexts {
+    display: flex;
+    flex-direction: column;
+  }
 }

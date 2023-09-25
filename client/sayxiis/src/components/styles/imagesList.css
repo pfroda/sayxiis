@@ -6,11 +6,7 @@
 }
 
 .containerImages {
-  /* width: 70%; */
   display: grid;
-  /* grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-  grid-auto-rows: 240px; */
-
   grid-template-columns: repeat(3, 240px);
   grid-template-rows: repeat(auto-fill, 1fr);
   grid-column-gap: 0px;
@@ -19,4 +15,12 @@
 
 .noPhotos {
   font-weight: 800;
+}
+
+@media only screen and (max-width: 600px) {
+  .containerImages {
+    grid-template-columns: repeat(3, 130px);
+    grid-template-rows: repeat(auto-fill, 1fr);
+    grid-row-gap: 5px;
+  }
 }

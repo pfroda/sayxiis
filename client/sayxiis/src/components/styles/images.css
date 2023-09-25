@@ -84,3 +84,38 @@
 .card .info .btn-2:hover {
   color: var(--main--brown);
 }
+
+@media only screen and (max-width: 600px) {
+  .card {
+    width: 125px;
+    height: 120px;
+    padding: 2rem 1rem;
+    background: #fff;
+    border-radius: 2px;
+  }
+
+  .card .info h1 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card .info p {
+    letter-spacing: 0px;
+    font-size: 12px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+
+  .card .info .btn-2 {
+    font-size: 12px;
+    border-radius: 2px;
+  }
+
+  .card:before {
+    border-radius: 2px;
+  }
+
+  .card img {
+    border-radius: 2px;
+  }
+}

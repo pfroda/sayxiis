@@ -96,3 +96,36 @@
   object-fit: cover;
   z-index: 3;
 }
+
+@media only screen and (max-width: 600px) {
+  .loggin-page {
+    height: 100%;
+    position: relative;
+  }
+
+  .author {
+    position: absolute;
+    bottom: 20px;
+    left: 35%;
+    font-size: 0.8em;
+  }
+
+  .photo-home {
+    width: 120px;
+    height: 150px;
+  }
+
+  .slogan {
+    width: 60%;
+    font-size: 1.2em;
+  }
+
+  .loggin-btn {
+    width: 200px;
+    height: 60px;
+  }
+
+  .home-title {
+    font-size: 3.5em;
+  }
+}

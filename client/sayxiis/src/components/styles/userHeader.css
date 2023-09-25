@@ -35,3 +35,29 @@
   justify-content: center;
   width: 70%;
 }
+
+@media only screen and (max-width: 600px) {
+  .userHeader {
+    height: 200px;
+    width: 100%;
+
+    padding: 10px 10px 10px 10px;
+  }
+
+  .text {
+    font-size: 1em;
+    width: 90%;
+  }
+
+  .userContainer {
+    width: 100%;
+    gap: 30px;
+  }
+
+  .userProfilePhoto {
+    width: 130px;
+    height: 90px;
+    border-radius: 3px;
+    border: 2px solid var(--main--white);
+  }
+}

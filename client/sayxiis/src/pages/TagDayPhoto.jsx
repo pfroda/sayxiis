@@ -84,8 +84,8 @@ export default function TagDayPhoto({ setPhotos, users }) {
           <div className="competionTexts">
             <div className="text timeCounter">
               <span className="timer">
+                <p className="p-timer-tag"> Remaining time:</p>
                 <CountdownTimer onZero={() => setTimerReachedZero(true)} />
-                <p> Until reset this tag</p>
               </span>{' '}
             </div>
 

@@ -24,3 +24,11 @@
 .inputBtn:hover {
   transform: scale(1.1);
 }
+
+@media only screen and (max-width: 600px) {
+  .inputBtn {
+    height: 60px;
+    width: 60px;
+    font-size: 0.8em;
+  }
+}
