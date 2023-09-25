@@ -10,6 +10,11 @@
   align-items: center;
 }
 
+.userFullName {
+  display: flex;
+  gap: 5px;
+}
+
 .userProfilePhoto {
   width: 150px;
   height: 150px;
@@ -40,7 +45,6 @@
   .userHeader {
     height: 200px;
     width: 100%;
-
     padding: 10px 10px 10px 10px;
   }
 

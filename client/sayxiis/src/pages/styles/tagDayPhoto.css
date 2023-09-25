@@ -92,13 +92,13 @@
   .examplesPhotosCompetion {
     grid-template-columns: repeat(3, 130px);
     grid-template-rows: repeat(auto-fill, 1fr);
+    margin-left: 5px;
   }
 
   .photoTag {
     width: 125px;
     height: 120px;
     border-radius: 2px;
-    padding: 0.1rem 0.04rem;
   }
 
   .headerBody {
