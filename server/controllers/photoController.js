@@ -1,5 +1,5 @@
 const db = require('../models/connectionDB');
-const photosDb = db.photoSchema;
+const photosDb = db.photo;
 
 async function getAllPhotos(req, res) {
   try {

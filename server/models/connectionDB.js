@@ -18,25 +18,26 @@ const db = {};
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.photoSchema = require('./photoSchema')(sequelize, DataTypes);
-db.userProfileSchema = require('./userProfileSchema')(
-  sequelize,
-  Sequelize.DataTypes
-);
+db.photo = require('./photoSchema')(sequelize, DataTypes);
+db.userProfile = require('./userProfileSchema')(sequelize, Sequelize.DataTypes);
+db.tags = require('./tag')(sequelize, Sequelize.DataTypes);
+db.photoTag = require('./photoTag')(sequelize, Sequelize.DataTypes);
 
-db.sequelize.sync({ force: false }).then(() => {
-  console.log('Re-sync done on DB 📑!');
-});
+// Associations Tables
 
 // 1 to many relation
-db.userProfileSchema.hasMany(db.photoSchema, {
+db.userProfile.hasMany(db.photo, {
   foreignKey: 'userId',
   as: 'photo',
 });
 
-db.photoSchema.belongsTo(db.userProfileSchema, {
+db.photo.belongsTo(db.userProfile, {
   foreignKey: 'userId',
   as: 'user',
+});
+
+db.sequelize.sync({ force: false }).then(() => {
+  console.log('Re-sync done on DB 📑!');
 });
 
 module.exports = db;

@@ -1,6 +1,6 @@
 const db = require('../models/connectionDB');
-const userProfile = db.userProfileSchema;
-const photosDb = db.photoSchema;
+const userProfile = db.userProfile;
+const photosDb = db.photo;
 
 async function getAllUsers(req, res) {
   try {
