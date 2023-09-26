@@ -6,7 +6,7 @@ const photosDb = db.photo;
 async function getAllTags(req, res) {
   try {
     const tags = await tagsModel.findAll({
-      include: { model: photosDb },
+      // include: { model: photosDb },
     });
     res.send(tags);
     res.status(200);
@@ -63,8 +63,7 @@ async function getAllTagsPhoto(req, res) {
     const photoTag = await tagsModel.findOne({
       include: [
         {
-          model: photoTagsModel,
-          as: 'PhotosTags',
+          model: photosDb,
         },
       ],
       where: { id: id },

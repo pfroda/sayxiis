@@ -20,6 +20,16 @@ export async function getAllUserPhoto() {
   }
 }
 
+export async function getAllUserPhotoById(id) {
+  try {
+    const response = await fetch(`${url}/users/photos/${id}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function addNewPhoto(photo) {
   try {
     const response = await fetch(`${url}/photos`, {
@@ -30,6 +40,26 @@ export async function addNewPhoto(photo) {
       body: JSON.stringify({
         userId: photo.userId,
         photoUrl: photo.photoUrl,
+      }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function addNewPhotoWithTag(photo) {
+  try {
+    const response = await fetch(`${url}/photos/withtag`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId: photo.userId,
+        photoUrl: photo.photoUrl,
+        tagId: photo.tagId,
       }),
     });
     const data = await response.json();

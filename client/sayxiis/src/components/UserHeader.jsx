@@ -23,8 +23,8 @@ export default function UserHeader({ user, uploadPhoto }) {
           <h2 className="text userName">@{user.username}</h2>
           <div className="text userFullName">
             {' '}
-            <h3>{user.name}</h3>
-            <h3>{user.surname}</h3>
+            <h4>{user.name}</h4>
+            <h4>{user.surname}</h4>
           </div>
           <p className="text userDescription">{user.intro}</p>
         </div>

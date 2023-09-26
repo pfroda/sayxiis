@@ -1,10 +1,12 @@
 const db = require('../models/connectionDB');
 const photosDb = db.photo;
+const tagsModel = db.tags;
 
 async function getAllPhotos(req, res) {
   try {
     const users = await photosDb.findAll({
       order: [['createdAt', 'DESC']],
+      include: { model: tagsModel },
     });
     res.send(users);
     res.status(200);
@@ -28,10 +30,21 @@ async function getPhotoById(req, res) {
 
 async function addPhoto(req, res) {
   try {
-    const TagId = req.params.id;
     const photo = req.body;
     const newPhoto = await photosDb.create(photo);
-    const tag = await db.tags.findByPk(3);
+    res.send(newPhoto);
+    res.status(201);
+  } catch (error) {
+    console.log(error);
+    res.status(500);
+  }
+}
+
+async function addPhotoWithTag(req, res) {
+  try {
+    const photo = req.body;
+    const newPhoto = await photosDb.create(photo);
+    const tag = await db.tags.findByPk(photo.tagId);
     await newPhoto.setTags([tag]);
     res.send(newPhoto);
     res.status(201);
@@ -64,6 +77,7 @@ async function votePhoto(req, res) {
     if (votePhoto) {
       votePhoto.vote = votePhoto.vote + 1;
       await votePhoto.save();
+      // TODO: return json
       res.status(200).send('1 vote more!');
     } else {
       res.status(404).send('Photo not found');
@@ -98,4 +112,5 @@ module.exports = {
   addPhoto,
   deletePhoto,
   getPhotoById,
+  addPhotoWithTag,
 };

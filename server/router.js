@@ -12,6 +12,7 @@ router.post('/photos', photoController.addPhoto);
 router.delete('/photos/:id', photoController.deletePhoto);
 router.put('/photos/:id/vote', photoController.votePhoto); //Need to update this!
 router.put('/photos/:id/sticker', photoController.winSticker);
+router.post('/photos/withtag', photoController.addPhotoWithTag);
 
 // User Router
 router.get('/users', userController.getAllUsers);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { uploadPhotoToCloudinary } from '../api/cloudinaryService';
-import { addNewPhoto } from '../api/photosService';
+import { addNewPhotoWithTag } from '../api/photosService';
 import { getPhotosByQuery } from '../api/unsplashService';
 import Button from '../components/Button';
 import InputPhoto from '../components/InputPhoto';
@@ -9,13 +9,29 @@ import Images from '../components/Images';
 import './styles/tagDayPhoto.css';
 import '../components/styles/imagesList.css';
 import CountdownTimer from '../components/CountdownTimer';
+import { getAllPhotoByTag, getAllTags } from '../api/tagService';
 
-export default function TagDayPhoto({ setPhotos, users }) {
+export default function TagDayPhoto({
+  setPhotos,
+  users,
+  photosTag,
+  setPhotosTag,
+  allTag,
+}) {
   const [examplesPhotos, setExamplesPhotos] = useState([]);
   const [photosDay, setPhotosDay] = useState([]);
   const tag = Tags;
   const [timerReachedZero, setTimerReachedZero] = useState(false);
   const [tagDay, setTagDay] = useState(randomTag(tag));
+
+  useEffect(() => {
+    // Get all images for tag x
+    getAllPhotoByTag(tagDay.id).then((res) => {
+      console.log(res);
+      setPhotosDay([...res.Photos]);
+    });
+    // setPhotosDay(result)
+  }, []);
 
   const uploadPhoto = (files) => {
     uploadPhotoToCloudinary(files[0]).then((res) => {
@@ -26,15 +42,20 @@ export default function TagDayPhoto({ setPhotos, users }) {
   function savePhotoOnDB(file) {
     const newPhoto = {
       userId: 1,
+      tagId: tagDay.id,
       photoUrl: file,
     };
 
-    addNewPhoto(newPhoto).then((photo) => {
+    addNewPhotoWithTag(newPhoto).then((photo) => {
       setPhotos((prev) => {
         const updatePhotos = [photo, ...prev];
         return updatePhotos;
       });
       setPhotosDay((prev) => {
+        const updatePhotos = [photo, ...prev];
+        return updatePhotos;
+      });
+      setPhotosTag((prev) => {
         const updatePhotos = [photo, ...prev];
         return updatePhotos;
       });
@@ -44,7 +65,7 @@ export default function TagDayPhoto({ setPhotos, users }) {
   useEffect(() => {
     async function fetchPhotos() {
       try {
-        const data = await getPhotosByQuery(tagDay, 3);
+        const data = await getPhotosByQuery(tagDay.name, 3);
         setExamplesPhotos(data.results);
 
         if (timerReachedZero) {
@@ -52,6 +73,7 @@ export default function TagDayPhoto({ setPhotos, users }) {
           const newTagDay = randomTag(tag);
           setTagDay(newTagDay); // Update the tagDay state
           setTimerReachedZero(false); // Reset the timerReachedZero state
+          setPhotosDay([]);
         }
       } catch (error) {
         console.error('Error fetching photos:', error);
@@ -64,7 +86,6 @@ export default function TagDayPhoto({ setPhotos, users }) {
   return (
     <div className="tagDayPhoto">
       {/* Header page*/}
-
       <div className="competionHeader">
         <div className="headerBody">
           <h1 className="tagTitle">Today tag theme</h1>
@@ -77,7 +98,7 @@ export default function TagDayPhoto({ setPhotos, users }) {
             </div>
 
             <p className="text competionTag">
-              Today tag: <span className="tag">#{tagDay}</span>
+              Today tag: <span className="tag">#{tagDay.name}</span>
             </p>
           </div>
           <InputPhoto setPhotos={setPhotos} uploadPhoto={uploadPhoto} />
@@ -88,9 +109,7 @@ export default function TagDayPhoto({ setPhotos, users }) {
           <Button title={'Examples'} />
         </div>
       </div>
-
       {/* Examples photos*/}
-
       <div className="photosCompetionsList">
         <div className="examplesPhotosCompetion">
           {examplesPhotos.map((photo) => (
@@ -103,16 +122,13 @@ export default function TagDayPhoto({ setPhotos, users }) {
           ))}
         </div>
       </div>
-
       <div className="section">
         <div className="buttons">
           <Button title={'Top photos'} />
           <Button title={'See more'} />
         </div>
       </div>
-
       {/*  Users day photos */}
-
       <div className="dayPhotos">
         <div className="userGridImages">
           <div className="containerImages">
@@ -121,7 +137,7 @@ export default function TagDayPhoto({ setPhotos, users }) {
             ) : (
               photosDay.map((photo) => (
                 <Images
-                  setPhotos={setPhotos}
+                  setPhotos={setPhotosTag}
                   users={users}
                   photo={photo}
                   key={photo.id}

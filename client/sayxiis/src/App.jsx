@@ -6,10 +6,13 @@ import UserProfile from './pages/UserProfile';
 import TagDayPhoto from './pages/TagDayPhoto';
 import Home from './pages/Home';
 import './App.css';
+import { getAllTags } from './api/tagService';
 
 function App() {
   const [users, setUsers] = useState([]);
   const [photos, setPhotos] = useState([]);
+  const [photosTag, setPhotosTag] = useState([]);
+  const [allTag, setAllTag] = useState([]);
 
   useEffect(() => {
     getAllUsers()
@@ -25,9 +28,31 @@ function App() {
     getAllUserPhoto()
       .then((res) => {
         setPhotos(res.photo);
+        setPhotosTag(res.photo);
       })
       .catch((error) => {
         console.error('Error fetching user photos:', error);
+      });
+  }, []);
+
+  // useEffect(() => {
+  //   getAllUserPhoto()
+  //     .then((res) => {
+  //       console.log(res.photo);
+  //       setPhotosTag(res.photo);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching user photos:', error);
+  //     });
+  // }, []);
+
+  useEffect(() => {
+    getAllTags()
+      .then((res) => {
+        setAllTag(res);
+      })
+      .catch((error) => {
+        console.error('Error fetching tags:', error);
       });
   }, []);
 
@@ -37,7 +62,14 @@ function App() {
         <Route
           path="/tagdayphoto"
           element={
-            <TagDayPhoto users={users} photos={photos} setPhotos={setPhotos} />
+            <TagDayPhoto
+              allTag={allTag}
+              users={users}
+              photos={photos}
+              setPhotos={setPhotos}
+              photosTag={photosTag}
+              setPhotosTag={setPhotosTag}
+            />
           }
         />
         <Route

@@ -15,7 +15,8 @@ export default function Images({ users, photo, setPhotos }) {
     <div className="card">
       <img alt="user image photo" src={photo.photoUrl} />
       <div className="info">
-        <h1>@{users[0].username}</h1>
+        <h1>@{users[0] ? users[0].username : ''}</h1>
+        {/* TODO: sometimes it does not load users in time  */}
         <p onClick={handleVote} className="btn-2">
           VOTE: <span>{photo.vote}</span>
         </p>
