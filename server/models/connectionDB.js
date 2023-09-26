@@ -18,10 +18,10 @@ const db = {};
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+db.userProfile = require('./userProfileSchema')(sequelize, DataTypes);
 db.photo = require('./photoSchema')(sequelize, DataTypes);
-db.userProfile = require('./userProfileSchema')(sequelize, Sequelize.DataTypes);
-db.tags = require('./tag')(sequelize, Sequelize.DataTypes);
-db.photoTag = require('./photoTag')(sequelize, Sequelize.DataTypes);
+db.tags = require('./tag')(sequelize, DataTypes);
+db.photoTag = require('./photoTag')(sequelize, DataTypes);
 
 // Associations Tables
 
@@ -34,6 +34,14 @@ db.userProfile.hasMany(db.photo, {
 db.photo.belongsTo(db.userProfile, {
   foreignKey: 'userId',
   as: 'user',
+});
+
+db.tags.belongsToMany(db.photo, {
+  through: db.photoTag,
+});
+
+db.photo.belongsToMany(db.tags, {
+  through: db.photoTag,
 });
 
 db.sequelize.sync({ force: false }).then(() => {

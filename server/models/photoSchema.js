@@ -1,9 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Photos = sequelize.define('photosdb', {
-    vote: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
+  const Photos = sequelize.define('Photos', {
     photoUrl: {
       type: DataTypes.STRING,
       allowNull: false,
