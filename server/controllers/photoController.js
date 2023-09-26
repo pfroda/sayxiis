@@ -28,8 +28,11 @@ async function getPhotoById(req, res) {
 
 async function addPhoto(req, res) {
   try {
+    const TagId = req.params.id;
     const photo = req.body;
     const newPhoto = await photosDb.create(photo);
+    const tag = await db.tags.findByPk(3);
+    await newPhoto.setTags([tag]);
     res.send(newPhoto);
     res.status(201);
   } catch (error) {
@@ -53,6 +56,7 @@ async function deletePhoto(req, res) {
   }
 }
 
+//I put this on tagController
 async function votePhoto(req, res) {
   try {
     const photoId = req.params.id;

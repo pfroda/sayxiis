@@ -29,7 +29,6 @@ export async function addNewPhoto(photo) {
       },
       body: JSON.stringify({
         userId: photo.userId,
-        vote: photo.vote,
         photoUrl: photo.photoUrl,
       }),
     });
@@ -57,6 +56,7 @@ export async function deletePhoto(id) {
   }
 }
 
+//I moved this to Tag
 export async function upVotePhoto(id) {
   try {
     const response = await fetch(`${url}/photos/${id}/vote`, {

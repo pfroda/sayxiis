@@ -1,9 +1,13 @@
 const db = require('../models/connectionDB');
-const tagsDb = db.tags;
+const tagsModel = db.tags;
+const photoTagsModel = db.photoTag;
+const photosDb = db.photo;
 
 async function getAllTags(req, res) {
   try {
-    const tags = await tagsDb.findAll({});
+    const tags = await tagsModel.findAll({
+      include: { model: photosDb },
+    });
     res.send(tags);
     res.status(200);
   } catch (error) {
@@ -15,7 +19,9 @@ async function getAllTags(req, res) {
 async function getTagById(req, res) {
   try {
     const tagId = req.params.id;
-    const getTag = await tagsDb.findByPk(tagId);
+    const getTag = await tagsModel.findByPk(tagId, {
+      include: { model: photosDb },
+    });
     res.send(getTag);
     res.status(200);
   } catch (error) {
@@ -27,7 +33,7 @@ async function getTagById(req, res) {
 async function addTag(req, res) {
   try {
     const tag = req.body;
-    const newTag = await tagsDb.create(tag);
+    const newTag = await tagsModel.create(tag);
     res.send(newTag);
     res.status(201);
   } catch (error) {
@@ -39,7 +45,7 @@ async function addTag(req, res) {
 async function deleteTag(req, res) {
   try {
     const tagId = req.params.id;
-    await tagsDb.destroy({
+    await tagsModel.destroy({
       where: {
         id: tagId,
       },
@@ -54,11 +60,11 @@ async function deleteTag(req, res) {
 async function getAllTagsPhoto(req, res) {
   const id = req.params.id;
   try {
-    const photoTag = await userProfile.findOne({
+    const photoTag = await tagsModel.findOne({
       include: [
         {
-          model: tagsDb,
-          as: 'photo',
+          model: photoTagsModel,
+          as: 'PhotosTags',
         },
       ],
       where: { id: id },
@@ -71,10 +77,28 @@ async function getAllTagsPhoto(req, res) {
   }
 }
 
+async function votePhoto(req, res) {
+  try {
+    const photoId = req.params.id;
+    const votePhoto = await photoTagsModel.findByPk(photoId);
+    if (votePhoto) {
+      votePhoto.votes = votePhoto.votes + 1;
+      await votePhoto.save();
+      res.status(200).send('1 vote more!');
+    } else {
+      res.status(404).send('Photo not found');
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal server error');
+  }
+}
+
 module.exports = {
   getAllTags,
   getTagById,
   addTag,
   deleteTag,
   getAllTagsPhoto,
+  votePhoto,
 };

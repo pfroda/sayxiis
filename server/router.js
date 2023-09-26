@@ -3,6 +3,7 @@ const router = express.Router();
 const photoController = require('./controllers/photoController');
 const userController = require('./controllers/userProfileController');
 const tagController = require('./controllers/tagController');
+const photosTagsController = require('./controllers/photoTagController');
 
 // Photo Router
 router.get('/photos', photoController.getAllPhotos);
@@ -26,5 +27,11 @@ router.get('/tags/:id', tagController.getTagById);
 router.post('/tags', tagController.addTag);
 router.delete('/tags/:id', tagController.deleteTag);
 router.get('/tags/photos/:id', tagController.getAllTagsPhoto);
+router.put('/tags/:id/vote', tagController.votePhoto);
+
+// Middle Photo - tag Router
+router.get('/photosTags', photosTagsController.getAllTagsByPhotos);
+router.get('/photosTags/:id', photosTagsController.getPhotosByTag);
+router.put('/photosTags/:id/vote', photosTagsController.votePhotoByTag);
 
 module.exports = router;
