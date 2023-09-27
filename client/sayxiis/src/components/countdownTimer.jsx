@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 
 function CountdownTimer({ onZero }) {
-  const initialDuration = 60; // 1 minute
+  const initialDuration = 15; // 1 minute
   //   const initialDuration = 24 * 60 * 60; // 24 hours in seconds
   const [timeRemaining, setTimeRemaining] = useState(initialDuration);
 

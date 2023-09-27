@@ -9,7 +9,7 @@ import Images from '../components/Images';
 import './styles/tagDayPhoto.css';
 import '../components/styles/imagesList.css';
 import CountdownTimer from '../components/CountdownTimer';
-import { getAllPhotoByTag, getAllTags } from '../api/tagService';
+import { getAllPhotoByTag } from '../api/tagService';
 
 export default function TagDayPhoto({
   setPhotos,

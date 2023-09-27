@@ -35,17 +35,6 @@ function App() {
       });
   }, []);
 
-  // useEffect(() => {
-  //   getAllUserPhoto()
-  //     .then((res) => {
-  //       console.log(res.photo);
-  //       setPhotosTag(res.photo);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching user photos:', error);
-  //     });
-  // }, []);
-
   useEffect(() => {
     getAllTags()
       .then((res) => {
