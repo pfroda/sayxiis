@@ -40,6 +40,8 @@ npm i
 You need to have 1 user for the app run
 (For now I don't have the implementation for the others users, if you put more than one user will break, yeah I need to make the getUserByID instead of getAllUsers)
 
+Use postman to create one: POST: localhost:3001/users
+
 ```{
   "username": "User x",
   "email": "userx@email.com",
@@ -61,6 +63,42 @@ DB_HOST=localhost  - Leave this likes this
 DB_DIALECT=postgres  - Leave this likes this
 DB_PORT=5432  - Leave this likes this
 }
+```
+
+### Creating the tags:
+
+You need create some tags on the DB for this app works
+(in this ordem because I didn't make the random tags come from the DB 🤣🤣
+I didn't have time!)
+
+use postman with:
+
+> POST: localhost:3001/tags
+
+```
+[
+    {
+        "name": "dog",
+    },
+    {
+        "name": "cat",
+    },
+    {
+        "name": "nature",
+    },
+    {
+        "name": "holiday",
+    },
+    {
+        "name": "food",
+    },
+    {
+        "name": "building",
+    },
+    {
+        "name": "plant",
+    }
+]
 ```
 
 ### Usage
