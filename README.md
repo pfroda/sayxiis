@@ -81,6 +81,8 @@ This is a [React.js](https://react.dev/learn) project with [`npm create vite@lat
 
 ## Getting Started
 
+You need to have a cloudinary account and unsplash account [Check the documentation at the end of the page]
+
 1 - Go to the folder
 
 ```bash
