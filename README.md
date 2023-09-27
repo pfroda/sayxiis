@@ -76,3 +76,52 @@ nodemon  index.js
   <br><br>
 
 ## Front End:
+
+This is a [React.js](https://react.dev/learn) project with [`npm create vite@latest`](https://vitejs.dev/guide/).
+
+## Getting Started
+
+1 - Go to the folder
+
+```bash
+cd client
+cd sayxiis
+```
+
+2 - Create a .env file:
+
+```
+# Cloudinary:
+VITE_APP_CLOUD_KEY=You key from cloudinary
+# Unsplash:
+VITE_APP_API_KEY=Your key from unsplash
+```
+
+2 - install all the dependencies
+
+```bash
+npm i
+```
+
+3 - Run the app
+
+```bash
+npm run dev
+```
+
+The app run one "http://localhost:5173/"
+
+### Documentations
+
+**Backend**
+
+- [Download NodeJs](https://nodejs.org/en/download)
+- [Download postgres](https://www.postgresql.org/)
+- [Sequalize](https://sequelize.org/docs/v6/getting-started/)
+- [Express](https://expressjs.com/en/starter/installing.html)<br>
+
+**Frontend**
+
+- [React](https://react.dev/)
+- [Api unsplash](https://unsplash.com/developers)
+- [Cloudinary](https://cloudinary.com/)
