@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getPhotosByQuery } from '../api/unsplashService';
-import './styles/home.css';
+import { getPhotosByQuery } from '../../api/unsplashService';
+import './home.css';
 
 export default function Home() {
   const [photosR, setPhotosR] = useState([]);
@@ -37,7 +37,10 @@ export default function Home() {
       <div className="loggin-page">
         <h1 className="home-title">SayXiis</h1>
         <div className="home-btn">
-          <button className="loggin-btn start">Start posting today</button>
+         <Link to='/register'>
+         <button className="loggin-btn start">Start posting today</button>
+         </Link>
+         
           <Link to="/profile">
             <button className="loggin-btn have">I have an account</button>
           </Link>

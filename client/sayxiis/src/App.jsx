@@ -4,7 +4,8 @@ import { getAllUsers } from './api/userServices';
 import { getAllUserPhoto } from './api/photosService';
 import UserProfile from './pages/UserProfile';
 import TagDayPhoto from './pages/TagDayPhoto';
-import Home from './pages/Home';
+import HomePage from './pages/HomePage';
+import Register from './components/Register/Register';
 import './App.css';
 import { getAllTags } from './api/tagService';
 
@@ -69,8 +70,11 @@ function App() {
         />
         <Route
           path="/"
-          element={<Home users={users} setPhotos={setPhotos} photos={photos} />}
+          element={<HomePage users={users} setPhotos={setPhotos} photos={photos} />}
         />
+        <Route
+          path='/register'
+          element={<Register/>}/>
       </Routes>
     </div>
   );

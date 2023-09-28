@@ -19,3 +19,24 @@ export async function getUserById(id) {
     console.log(error);
   }
 }
+
+export async function postUser(user) {
+  console.log('hey')
+  try {
+    const response = await fetch(`${url}/users`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: user.username,
+        email: user.email,
+        password: user.password
+      }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}

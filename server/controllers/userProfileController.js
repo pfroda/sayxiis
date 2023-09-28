@@ -1,6 +1,7 @@
 const db = require('../models/connectionDB');
 const userProfile = db.userProfile;
 const photosDb = db.photo;
+const bcrypt = require('bcrypt')
 
 async function getAllUsers(req, res) {
   try {
@@ -28,7 +29,17 @@ async function getAllUserById(req, res) {
 async function addUser(req, res) {
   try {
     const user = req.body;
-    const newUser = await userProfile.create(user);
+    const hashPassword = await bcrypt.hash(user.password, 10);
+
+    const newUser = await userProfile.create({
+      username: user.username,
+      password: hashPassword,
+      email: user.email,
+      profilePicture: user.profilePicture || null,
+      name: user.name || null,
+      surname: user.surname || null,
+      intro:user.intro || null
+    });
     res.send(newUser);
     res.status(201);
   } catch (error) {
