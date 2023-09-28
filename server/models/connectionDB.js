@@ -1,6 +1,10 @@
 require('dotenv').config();
 const { Sequelize, DataTypes } = require('sequelize');
 
+if (!process.env.DB_DIALECT) {
+  throw new Error('DB_DIALECT environment variable is not defined');
+}
+
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
@@ -8,7 +12,7 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,
     dialect: process.env.DB_DIALECT,
-    port: 5432,
+    port: process.env.DB_PORT || 5432, // You can add a default port here
     logging: false,
   }
 );
