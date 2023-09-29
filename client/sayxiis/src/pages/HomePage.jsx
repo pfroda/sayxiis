@@ -4,9 +4,7 @@ import Register from '../components/Register/Register';
 export default function HomePage() {
   return (
     <>
-    <Home/>
-    <Register/>
-    
+    <Home/>    
     </>
    
   );

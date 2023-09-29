@@ -41,7 +41,7 @@ export default function Home() {
          <button className="loggin-btn start">Start posting today</button>
          </Link>
          
-          <Link to="/profile">
+          <Link to="/login">
             <button className="loggin-btn have">I have an account</button>
           </Link>
         </div>

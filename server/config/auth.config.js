@@ -1,3 +1,3 @@
 module.exports = {
-    secret: "allcodeandnoplay-makesfabregaamadboy"
+    TOKEN_SECRET: "gocintiago"
   };

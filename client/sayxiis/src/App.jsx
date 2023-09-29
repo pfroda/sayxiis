@@ -6,8 +6,11 @@ import UserProfile from './pages/UserProfile';
 import TagDayPhoto from './pages/TagDayPhoto';
 import HomePage from './pages/HomePage';
 import Register from './components/Register/Register';
+import Login from './components/Login/Login';
+import AuthProvider from './context/authContext';
 import './App.css';
 import { getAllTags } from './api/tagService';
+import { ProtectRoutes } from './components/protectRoutes';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -48,6 +51,7 @@ function App() {
 
   return (
     <div className="app">
+      <AuthProvider>
       <Routes>
         <Route
           path="/tagdayphoto"
@@ -62,12 +66,7 @@ function App() {
             />
           }
         />
-        <Route
-          path="/profile"
-          element={
-            <UserProfile users={users} setPhotos={setPhotos} photos={photos} />
-          }
-        />
+        
         <Route
           path="/"
           element={<HomePage users={users} setPhotos={setPhotos} photos={photos} />}
@@ -75,7 +74,21 @@ function App() {
         <Route
           path='/register'
           element={<Register/>}/>
+        <Route
+          path='/login'
+          element={<Login/>}/>
+
+          <Route element={<ProtectRoutes/>}>
+            <Route
+             path="/profile"
+             element={
+            <UserProfile users={users} setPhotos={setPhotos}  photos={photos} />
+          }
+        />
+          </Route>
+
       </Routes>
+      </AuthProvider>
     </div>
   );
 }

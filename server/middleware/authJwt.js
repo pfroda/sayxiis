@@ -3,26 +3,18 @@ const config = require("../config/auth.config.js");
 const db = require("../models");
 const User = db.userProfileSchema;
 
-verifyToken = (req, res, next) => {
-    let token = req.headers["x-access-token"];
+async function verifyToken (req, res, next) {
+    let {token} = req.cookies;
   
-    if (!token) {
-      return res.status(403).send({
-        message: "No token provided!"
-      });
+    if (!token) {return res.status(403).send({ message: "No token provided!"});}
+
+    try {
+     const user = await jwt.verify(token, config.TOKEN_SECRET)
+      req.user = user;
+      next();
+    } catch (err) {
+      res.status(403).json({message: 'invalid token'})
     }
-  
-    jwt.verify(token,
-              config.secret,
-              (err, decoded) => {
-                if (err) {
-                  return res.status(401).send({
-                    message: "Unauthorized!",
-                  });
-                }
-                req.userId = decoded.id;
-                next();
-              });
   };
 
   const authJwt = verifyToken;

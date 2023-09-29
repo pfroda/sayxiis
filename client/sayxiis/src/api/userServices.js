@@ -21,13 +21,13 @@ export async function getUserById(id) {
 }
 
 export async function createUser(user) {
-  console.log('hey')
+
   try {
     const response = await fetch(`${url}/users/signup`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      credentials: 'include',
+      mode: 'cors',
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         username: user.username,
         email: user.email,
@@ -35,6 +35,7 @@ export async function createUser(user) {
       }),
     });
     const data = await response.json();
+    console.log(data)
     return data;
   } catch (error) {
     console.log(error);
@@ -45,9 +46,9 @@ export async function logUser (user) {
   try {
     const response = await fetch(`${url}/users/signin`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      credentials: 'include',
+      mode: 'cors',
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         email: user.email,
         password: user.password

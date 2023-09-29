@@ -1,9 +1,11 @@
-import React from 'react'
-import { createUser } from '../../api/userServices';
+import React from 'react';
+import { useAuth } from '../../context/authContext';
+// import { signup } from '../../api/userServices';
 import './register.css'
 
 function Register() {
-
+  const { signup } = useAuth();
+  
     async function handleRegister(e) {
         e.preventDefault();
 
@@ -13,24 +15,24 @@ function Register() {
             password: e.target.password.value
         }
 
-        await createUser(userData);
-        e.target.reset()
-
+        await signup(userData);
+       
     }
 
 
   return (
-    <>
-    <div className='Register'>Register
-    <h5>hello</h5>
+    <div className='Register-container'>
+    <div className='Register'>
+      <h2>Create your account now</h2>
     <form action="" onSubmit={handleRegister}>
         <input type="text" name='username' placeholder='Username'/>
         <input type="text" name='email' placeholder='Email'/>
         <input type="password" name='password' placeholder='Password'/>
         <button type='submit'>Submit</button>
+        <h5>It's free!</h5>
     </form>
     </div>
-    </>
+    </div>
   )
 }
 
