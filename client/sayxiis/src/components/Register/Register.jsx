@@ -1,5 +1,5 @@
 import React from 'react'
-import { postUser } from '../../api/userServices';
+import { createUser } from '../../api/userServices';
 import './register.css'
 
 function Register() {
@@ -13,7 +13,7 @@ function Register() {
             password: e.target.password.value
         }
 
-        await postUser(userData);
+        await createUser(userData);
         e.target.reset()
 
     }

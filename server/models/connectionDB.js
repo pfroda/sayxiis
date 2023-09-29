@@ -49,7 +49,7 @@ db.photo.belongsToMany(db.tags, {
 });
 
 db.sequelize.sync({ force: false }).then(() => {
-  console.log('Re-sync done on DB 📑!');
+  console.log('Well done Cintia! Re-sync done on DB 📑!');
 });
 
 module.exports = db;

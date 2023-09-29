@@ -1,6 +1,8 @@
 const db = require('../models/connectionDB');
 const userProfile = db.userProfile;
 const photosDb = db.photo;
+
+var jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt')
 
 async function getAllUsers(req, res) {
@@ -26,7 +28,7 @@ async function getAllUserById(req, res) {
   }
 }
 
-async function addUser(req, res) {
+async function createUser (req, res) {
   try {
     const user = req.body;
     const hashPassword = await bcrypt.hash(user.password, 10);
@@ -47,6 +49,45 @@ async function addUser(req, res) {
     res.status(500);
   }
 }
+
+async function logUser (req, res) {
+  User.findOne({
+    where: {
+      username: req.body.username
+    }
+  })
+    .then(user => {
+      if (!user) {
+        return res.status(404).send({ message: "User Not found." });
+      }
+
+      var passwordIsValid = bcrypt.compareSync(
+        req.body.password,
+        user.password
+      );
+
+      if (!passwordIsValid) {
+        return res.status(401).send({
+          accessToken: null,
+          message: "Invalid Password!"
+        });
+      }
+
+      const token = jwt.sign({ id: user.id },
+                              config.secret,
+                              {
+                                algorithm: 'HS256',
+                                allowInsecureKeySizes: true,
+                                expiresIn: 86400, // 24 hours
+                              });
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+
+
 
 async function updateUser(req, res) {
   try {
@@ -97,7 +138,8 @@ async function getAllUserPhoto(req, res) {
 
 module.exports = {
   getAllUsers,
-  addUser,
+  createUser,
+  logUser,
   getAllUserById,
   updateUser,
   deleteUser,

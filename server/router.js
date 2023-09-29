@@ -18,7 +18,8 @@ router.post('/photos/withtag', photoController.addPhotoWithTag);
 router.get('/users', userController.getAllUsers);
 router.get('/users/photos/:id', userController.getAllUserPhoto);
 router.get('/users/:id', userController.getAllUserById);
-router.post('/users', userController.addUser);
+router.post('/users/signup', userController.createUser);
+router.post('/users/signin', userController.logUser)
 router.put('/users/:id', userController.updateUser);
 router.delete('/users/:id', userController.deleteUser);
 
