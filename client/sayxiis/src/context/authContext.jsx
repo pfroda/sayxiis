@@ -18,7 +18,7 @@ function AuthProvider({children}) {
     const [cookies, setCookies, removeCookie] = useCookies();
     const navigate = useNavigate()
 
-    
+
     const signup = async (user) => {
       try {
         const response = await createUser(user);
@@ -37,9 +37,12 @@ function AuthProvider({children}) {
         const response = await logUser(user);
         setUser(response);
         setIsLogged(true);
-        setCookies('jwt', response.accessToken);
-        navigate('/profile')
-        // console.log(cookies)
+
+        if (response.accessToken) {
+          setCookies('jwt', response.accessToken);
+          navigate('/profile')
+        }
+
       } catch (err) {
         console.log('Auth error:', err)
       }

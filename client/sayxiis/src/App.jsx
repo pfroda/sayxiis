@@ -53,19 +53,7 @@ function App() {
     <div className="app">
       <AuthProvider>
       <Routes>
-        <Route
-          path="/tagdayphoto"
-          element={
-            <TagDayPhoto
-              allTag={allTag}
-              users={users}
-              photos={photos}
-              setPhotos={setPhotos}
-              photosTag={photosTag}
-              setPhotosTag={setPhotosTag}
-            />
-          }
-        />
+        
         
         <Route
           path="/"
@@ -85,6 +73,23 @@ function App() {
             <UserProfile users={users} setPhotos={setPhotos}  photos={photos} />
           }
         />
+
+          <Route
+            path="/tagdayphoto"
+             element={
+            <TagDayPhoto
+              allTag={allTag}
+              users={users}
+              photos={photos}
+              setPhotos={setPhotos}
+              photosTag={photosTag}
+              setPhotosTag={setPhotosTag}
+            />
+          }
+        />
+
+
+
           </Route>
 
       </Routes>
