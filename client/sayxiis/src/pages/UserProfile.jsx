@@ -1,23 +1,22 @@
-import { uploadPhotoToCloudinary } from '../api/cloudinaryService';
-import { addNewPhoto } from '../api/photosService';
-import ListUserPhotos from '../components/ListUserPhotos';
-import UserHeader from '../components/UserHeader';
-import { useAuth } from '../context/authContext';
-import { usePhotos } from '../context/photosContext';
-import { getUserById } from '../api/userServices';
 import './styles/userProfile.css';
 import { useEffect } from 'react';
+import ListUserPhotos from '../components/ListUserPhotos';
+import UserHeader from '../components/UserHeader';
+import { uploadPhotoToCloudinary } from '../api/cloudinaryService';
+import { getUserById } from '../api/userServices';
+import { addNewPhoto } from '../api/photosService';
+import { useAuth } from '../context/authContext';
+import { usePhotos } from '../context/photosContext';
 
 export default function UserProfile() {
-  // export default function UserProfile({ photos, setPhotos }) {
-  const { user, setUser, users } = useAuth();
-  const { photos, setPhotos } = usePhotos();
+  const { user, setUser } = useAuth();
+  const { setPhotos } = usePhotos();
 
   useEffect(() => {
     getUserById(user.id).then(userInfo => {
       setUser(userInfo);
     })
-}, []);
+  }, []);
 
   const uploadPhoto = (files) => {
     uploadPhotoToCloudinary(files[0]).then((res) => {
@@ -48,7 +47,6 @@ export default function UserProfile() {
       <div key={user.id}>
         <UserHeader user={user} uploadPhoto={uploadPhoto} />
       </div>
-      {/* <ListUserPhotos setPhotos={setPhotos} users={users} photos={photos} /> */}
       <ListUserPhotos />
     </div>
   );

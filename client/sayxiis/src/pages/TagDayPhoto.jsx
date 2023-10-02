@@ -1,28 +1,28 @@
+import '../components/styles/imagesList.css';
+import './styles/tagDayPhoto.css';
 import { useEffect, useState } from 'react';
+import randomTag, { Tags } from '../util/randomTag';
+import Button from '../components/Button';
+import InputPhoto from '../components/InputPhoto';
+import Images from '../components/Images';
+import CountdownTimer from '../components/CountdownTimer';
 import { uploadPhotoToCloudinary } from '../api/cloudinaryService';
 import { addNewPhotoWithTag } from '../api/photosService';
 import { getPhotosByQuery } from '../api/unsplashService';
-import Button from '../components/Button';
-import InputPhoto from '../components/InputPhoto';
-import randomTag, { Tags } from '../util/randomTag';
-import Images from '../components/Images';
-import './styles/tagDayPhoto.css';
-import '../components/styles/imagesList.css';
-import CountdownTimer from '../components/CountdownTimer';
 import { getAllPhotoByTag } from '../api/tagService';
+import { usePhotos } from '../context/photosContext';
+import { useAuth } from '../context/authContext';
 
-export default function TagDayPhoto({
-  setPhotos,
-  users,
-  photosTag,
-  setPhotosTag,
-  allTag,
-}) {
+export default function TagDayPhoto({setPhotosTag}) {
+  
   const [examplesPhotos, setExamplesPhotos] = useState([]);
   const [photosDay, setPhotosDay] = useState([]);
-  const tag = Tags;
   const [timerReachedZero, setTimerReachedZero] = useState(false);
+  const tag = Tags;
   const [tagDay, setTagDay] = useState(randomTag(tag));
+
+  const { setPhotos } = usePhotos();
+  const { user } = useAuth();
 
   useEffect(() => {
     // Get all images for tag x
@@ -41,7 +41,7 @@ export default function TagDayPhoto({
 
   function savePhotoOnDB(file) {
     const newPhoto = {
-      userId: 1,
+      userId: user.id,
       tagId: tagDay.id,
       photoUrl: file,
     };
@@ -138,10 +138,8 @@ export default function TagDayPhoto({
               photosDay.map((photo) => (
                 <Images
                   setPhotos={setPhotosTag}
-                  users={users}
                   photo={photo}
-                  key={photo.id}
-                />
+                  key={photo.id}/>
               ))
             )}{' '}
           </div>

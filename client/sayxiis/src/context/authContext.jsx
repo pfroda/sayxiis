@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { createContext, useContext, useState } from 'react';
 import { createUser, logUser, getAllUsers } from '../api/userServices';
 import { useCookies } from 'react-cookie';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext({});
 
@@ -10,7 +10,6 @@ export const useAuth = () => {
     const context = useContext(AuthContext);
     return context;
   };
-  
 
 function AuthProvider({children}) {
     const [user, setUser] = useState(null);

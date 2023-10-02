@@ -1,7 +1,10 @@
-import { upVotePhoto } from '../api/photosService';
 import './styles/images.css';
+import { upVotePhoto } from '../api/photosService';
+import { useAuth } from '../context/authContext';
 
-export default function Images({ users, photo, setPhotos }) {
+export default function Images({ photo, setPhotos }) {
+  const { users } = useAuth();
+
   function handleVote() {
     upVotePhoto(photo.id).then(() => {
       setPhotos((prev) => {

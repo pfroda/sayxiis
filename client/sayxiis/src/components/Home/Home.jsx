@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { getPhotosByQuery } from '../../api/unsplashService';
 import './home.css';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { getPhotosByQuery } from '../../api/unsplashService';
 
 export default function Home() {
   const [photosR, setPhotosR] = useState([]);
@@ -18,7 +18,6 @@ export default function Home() {
         console.error('Error fetching photos:', error);
       }
     }
-
     fetchPhotos();
   }, []);
 
