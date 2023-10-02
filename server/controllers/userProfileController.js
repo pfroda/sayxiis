@@ -1,8 +1,7 @@
 const db = require('../models/connectionDB');
 const userProfile = db.userProfile;
 const photosDb = db.photo;
-const TOKEN_SECRET = require('../config/auth.config')
-const tokenTEST = 'GoCintiaGo!'
+const TOKEN_SECRET = require('../config/.token')
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt')
 
@@ -17,7 +16,7 @@ async function getAllUsers(req, res) {
   }
 }
 
-async function getAllUserById(req, res) {
+async function getUserById(req, res) {
   try {
     const userId = req.params.id;
     const getUser = await userProfile.findByPk(userId);
@@ -59,9 +58,12 @@ async function createUser(req, res) {
 
     console.log('Created new user:', newUser);
 
-    const accessToken = jwt.sign({ id: newUser.id }, tokenTEST);
+    const accessToken = jwt.sign({ id: newUser.id }, TOKEN_SECRET);
     console.log('Generated access token:', accessToken);
-    res.cookie('jwt', accessToken, {httpOnly: true, secure: true, SameSite: 'strict', expires: new Date(Number(new Date()) + 30*60*1000)})
+    res.cookie('token', accessToken, {httpOnly: true, secure: true, SameSite: 'strict', expires: new Date(Number(new Date()) + 30*60*1000)})
+    res.json({
+      id: username._id
+    })
   
     res.status(201).send({ accessToken });
   } catch (error) {
@@ -82,11 +84,11 @@ async function logUser (req, res) {
     console.log('password matchs', validatedPass)
 
     if (!validatedPass) throw new Error();
-    const accessToken = jwt.sign({ id: user.id }, tokenTEST);
+    const accessToken = jwt.sign({ id: user.id }, TOKEN_SECRET);
     // console.log('Generated access token:', accessToken);
-    res.cookie('jwt', accessToken, {httpOnly: true, secure: true, SameSite: 'strict', expires: new Date(Number(new Date()) + 30*60*1000)});
+    res.cookie('token', accessToken, {httpOnly: true, secure: true, SameSite: 'strict', expires: new Date(Number(new Date()) + 30*60*1000)});
     // res.json({id: user.id})
-    res.status(200).send({accessToken})
+    res.status(200).send({accessToken, id: user.id})
     } catch (error) {
       res
         .status(401)
@@ -148,7 +150,7 @@ module.exports = {
   getAllUsers,
   createUser,
   logUser,
-  getAllUserById,
+  getUserById,
   updateUser,
   deleteUser,
   getAllUserPhoto,

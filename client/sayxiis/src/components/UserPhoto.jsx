@@ -1,8 +1,8 @@
-// import { useState } from 'react';
 import { deletePhoto } from '../api/photosService';
 import './styles/images.css';
 
 export default function UserPhoto({ photo, setPhotos }) {
+  
   function handleDelete() {
     deletePhoto(photo.id).then(() => {
       setPhotos((prev) => {

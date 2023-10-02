@@ -4,6 +4,8 @@ const photoController = require('./controllers/photoController');
 const userController = require('./controllers/userProfileController');
 const tagController = require('./controllers/tagController');
 const photosTagsController = require('./controllers/photoTagController');
+const verifyToken = require('./middleware/authJwt');
+
 
 // Photo Router
 router.get('/photos', photoController.getAllPhotos);
@@ -17,7 +19,7 @@ router.post('/photos/withtag', photoController.addPhotoWithTag);
 // User Router
 router.get('/users', userController.getAllUsers);
 router.get('/users/photos/:id', userController.getAllUserPhoto);
-router.get('/users/:id', userController.getAllUserById);
+router.get('/users/:id', userController.getUserById);
 router.post('/users/signup', userController.createUser);
 router.post('/users/signin', userController.logUser)
 router.put('/users/:id', userController.updateUser);

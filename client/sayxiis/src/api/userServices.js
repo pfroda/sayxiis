@@ -60,3 +60,4 @@ export async function logUser (user) {
     console.log(error);
   }
 }
+

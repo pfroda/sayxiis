@@ -1,7 +1,10 @@
 import UserPhoto from './UserPhoto';
 import './styles/imagesList.css';
+import { usePhotos } from '../context/photosContext';
 
-export default function ListUserPhotos({ photos, setPhotos }) {
+  export default function ListUserPhotos() {
+  const { photos, setPhotos } = usePhotos();
+
   return (
     <div className="userGridImages">
       <div className="containerImages">
