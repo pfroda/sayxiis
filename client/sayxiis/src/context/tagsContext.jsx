@@ -22,16 +22,6 @@ function TagsProvider({children}) {
         });
     }, []);
 
-  //   useEffect(() => {
-  //     getAllPhotoByTag()
-  //     .then((res) => {
-  //         setAllTag(res);
-  //     })
-  //     .catch((error) => {
-  //         console.error('Error fetching tags:', error.message);
-  //     });
-  // }, []);
-
   return (
     <TagsContext.Provider value={{ allTag, setAllTag }}>
         {children}

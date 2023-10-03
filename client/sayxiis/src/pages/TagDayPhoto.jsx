@@ -7,14 +7,16 @@ import InputPhoto from '../components/InputPhoto';
 import Images from '../components/Images';
 import CountdownTimer from '../components/CountdownTimer';
 import { uploadPhotoToCloudinary } from '../api/cloudinaryService';
-import { addNewPhotoWithTag } from '../api/photosService';
+import { addNewPhotoWithTag, getAllUserPhoto } from '../api/photosService';
 import { getPhotosByQuery } from '../api/unsplashService';
-import { getAllPhotoByTag } from '../api/tagService';
+import { getAllTags, getAllPhotoByTag } from '../api/tagService';
 import { usePhotos } from '../context/photosContext';
 import { useAuth } from '../context/authContext';
 
-export default function TagDayPhoto({setPhotosTag}) {
+export default function TagDayPhoto() {
   
+  const [photosTag, setPhotosTag] = useState([]);
+  const [allTag, setAllTag] = useState([]);
   const [examplesPhotos, setExamplesPhotos] = useState([]);
   const [photosDay, setPhotosDay] = useState([]);
   const [timerReachedZero, setTimerReachedZero] = useState(false);
@@ -23,6 +25,27 @@ export default function TagDayPhoto({setPhotosTag}) {
 
   const { setPhotos } = usePhotos();
   const { user } = useAuth();
+
+  useEffect(() => {
+    getAllUserPhoto()
+      .then((res) => {
+        setPhotos(res.photo);
+        setPhotosTag(res.photo);
+      })
+      .catch((error) => {
+        console.error('Error fetching user photos:', error);
+      });
+  }, []);
+
+  useEffect(() => {
+    getAllTags()
+      .then((res) => {
+        setAllTag(res);
+      })
+      .catch((error) => {
+        console.error('Error fetching tags:', error);
+      });
+  }, []);
 
   useEffect(() => {
     // Get all images for tag x

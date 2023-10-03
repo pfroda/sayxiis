@@ -38,12 +38,8 @@ export default function UserProfile() {
     });
   }
 
-  const handleClick = () => {
-    console.log(user);
-  }
   return (
     <div className="userProfile">
-      <p onClick={handleClick}>Caca</p>
       <div key={user.id}>
         <UserHeader user={user} uploadPhoto={uploadPhoto} />
       </div>
