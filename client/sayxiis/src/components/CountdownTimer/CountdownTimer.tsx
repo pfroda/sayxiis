@@ -1,25 +1,25 @@
 // import moment from 'moment';
 import { useState, useEffect } from 'react';
 
-function CountdownTimer({ onZero }) {
-  const initialDuration = 15; // 1 minute
+function CountdownTimer({ onZero }: { onZero: () => void }) {
+  const initialDuration = 175; // 1 minute
   //   const initialDuration = 24 * 60 * 60; // 24 hours in seconds
   const [timeRemaining, setTimeRemaining] = useState(initialDuration);
 
   useEffect(() => {
-    let interval;
-
+    let interval: NodeJS.Timeout | number | null = null;
+  
     if (timeRemaining > 0) {
       interval = setInterval(() => {
         setTimeRemaining((prevTime) => prevTime - 1);
       }, 1000);
-    } else {
+    } else if (interval !== null) {
       onZero();
-      clearInterval(interval);
+      clearInterval(interval as NodeJS.Timeout);
       setTimeRemaining(initialDuration);
     }
-
-    return () => clearInterval(interval);
+  
+    return () => clearInterval(interval as NodeJS.Timeout);
   }, [timeRemaining, onZero]);
 
   //Only use if it for 1 day:

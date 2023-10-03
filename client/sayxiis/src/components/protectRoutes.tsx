@@ -4,5 +4,5 @@ import { useAuth } from "../context/authContext";
 export const ProtectRoutes = () => {
     const { cookies } = useAuth();
 
-    return cookies.token ? <Outlet/> : <Navigate to='/' exact/>
+    return cookies.token ? <Outlet/> : <Navigate to='/' />
 }

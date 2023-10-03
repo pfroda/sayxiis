@@ -1,20 +1,24 @@
 import { useEffect } from 'react';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 import { getAllUserPhotoById } from '../api/photosService';
 import { useAuth } from './authContext';
+import { Photos, PhotoTags, PhotosContextType } from '../Interfaces';
 
-const PhotosContext = createContext({});
+const PhotosContext = createContext<PhotosContextType | undefined>(undefined);
 
 export const usePhotos = () => {
   const context = useContext(PhotosContext);
+  if (!context) {
+    throw new Error("usePhoto must be used within a PhotoProvider");
+  }
   return context;
 };
 
-function PhotosProvider({ children }) {
+function PhotosProvider({ children }: {children: ReactNode}) {
   const { user } = useAuth();
 
-  const [photos, setPhotos] = useState([]);
-  const [photosTag, setPhotosTag] = useState([]);
+  const [photos, setPhotos] = useState<Photos | null>(null);
+  const [photosTag, setPhotosTag] = useState<PhotoTags | null>(null);
 
   useEffect(() => {
     if (user) {
@@ -26,9 +30,8 @@ function PhotosProvider({ children }) {
         console.log(error.message);
       });
     } else {
-      // Handle the case when there is no authenticated user
-      setPhotos([]); // Clear the photos state or handle it as needed
-      setPhotosTag([]);
+      setPhotos(null);
+      setPhotosTag(null);
     }
   }, [user]);
 

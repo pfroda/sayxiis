@@ -1,8 +1,8 @@
+import './userHeader.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import InputPhoto from '../InputPhoto/InputPhoto';
-import './userHeader.css';
 
 export default function UserHeader({ user, uploadPhoto }) {
   const [isFollowed, setIsFollowed] = useState(false);
@@ -17,8 +17,7 @@ export default function UserHeader({ user, uploadPhoto }) {
         <img
           className="userProfilePhoto"
           alt="user image photo"
-          src={user.profilePicture}
-        />
+          src={user.profilePicture}/>
         <div className="userTexts">
           <h2 className="text userName">@{user.username}</h2>
           <div className="text userFullName">
@@ -28,14 +27,13 @@ export default function UserHeader({ user, uploadPhoto }) {
           </div>
           <p className="text userDescription">{user.intro}</p>
         </div>
-
         <InputPhoto uploadPhoto={uploadPhoto} />
       </div>
+
       <div className="userButtons">
         <Button
           funcFollow={handleClick}
-          title={isFollowed ? 'Following' : 'Follow'}
-        />
+          title={isFollowed ? 'Following' : 'Follow'}/>
         <Button title={'🏆 Stickers'} />
         <Link to="/tagdayphoto">
           {' '}

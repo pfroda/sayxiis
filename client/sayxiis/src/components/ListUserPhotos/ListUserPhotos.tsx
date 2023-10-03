@@ -2,8 +2,12 @@ import UserPhoto from '../UserPhoto/UserPhoto';
 import '../ImagesGrid/imagesgrid.css'
 import { usePhotos } from '../../context/photosContext';
 
-  export default function ListUserPhotos() {
+export default function ListUserPhotos() {
   const { photos, setPhotos } = usePhotos();
+
+  if (photos === null) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="userGridImages">

@@ -12,18 +12,18 @@ import { getPhotosByQuery } from '../api/unsplashService';
 import { getAllTags, getAllPhotoByTag } from '../api/tagService';
 import { usePhotos } from '../context/photosContext';
 import { useAuth } from '../context/authContext';
+import { useTags } from '../context/tagsContext';
 
 export default function TagDayPhoto() {
   
-  const [photosTag, setPhotosTag] = useState([]);
-  const [allTag, setAllTag] = useState([]);
   const [examplesPhotos, setExamplesPhotos] = useState([]);
   const [photosDay, setPhotosDay] = useState([]);
   const [timerReachedZero, setTimerReachedZero] = useState(false);
   const tag = Tags;
   const [tagDay, setTagDay] = useState(randomTag(tag));
 
-  const { setPhotos } = usePhotos();
+  const { setPhotos, setPhotosTag } = usePhotos();
+  const { setAllTag } = useTags();
   const { user } = useAuth();
 
   useEffect(() => {
@@ -56,15 +56,15 @@ export default function TagDayPhoto() {
     // setPhotosDay(result)
   }, []);
 
-  const uploadPhoto = (files) => {
+  const uploadPhoto = (files: string[]) => {
     uploadPhotoToCloudinary(files[0]).then((res) => {
       savePhotoOnDB(res.data.url);
     });
   };
 
-  function savePhotoOnDB(file) {
+  function savePhotoOnDB(file: string) {
     const newPhoto = {
-      userId: user.id,
+      userId: user?.id ?? 0,
       tagId: tagDay.id,
       photoUrl: file,
     };
@@ -123,7 +123,7 @@ export default function TagDayPhoto() {
               Today tag: <span className="tag">#{tagDay.name}</span>
             </p>
           </div>
-          <InputPhoto setPhotos={setPhotos} uploadPhoto={uploadPhoto} />
+          <InputPhoto uploadPhoto={uploadPhoto} />
         </div>
       </div>
       <div className="section">
@@ -139,8 +139,7 @@ export default function TagDayPhoto() {
               key={photo.id}
               className="photoTag"
               alt={photo.alt_description}
-              src={photo.urls.small}
-            />
+              src={photo.urls.small}/>
           ))}
         </div>
       </div>

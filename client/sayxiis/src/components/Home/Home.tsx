@@ -5,7 +5,7 @@ import { getPhotosByQuery } from '../../api/unsplashService';
 
 export default function Home() {
   const [photosR, setPhotosR] = useState([]);
-  const [photosL, setphotosL] = useState([]);
+  const [photosL, setPhotosL] = useState([]);
 
   useEffect(() => {
     async function fetchPhotos() {
@@ -13,7 +13,7 @@ export default function Home() {
         const data1 = await getPhotosByQuery('photography', 5);
         const data2 = await getPhotosByQuery('friends', 5);
         setPhotosR(data1.results);
-        setphotosL(data2.results);
+        setPhotosL(data2.results);
       } catch (error) {
         console.error('Error fetching photos:', error);
       }

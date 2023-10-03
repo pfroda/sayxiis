@@ -1,6 +1,6 @@
 import './inputPhoto.css';
 
-export default function ButtonPhoto({ uploadPhoto }) {
+export default function InputPhoto({ uploadPhoto }) {
   return (
     <div>
       <div>

@@ -10,7 +10,7 @@ export async function getAllTags() {
   }
 }
 
-export async function getTagById(id) {
+export async function getTagById(id: number) {
   try {
     const response = await fetch(`${url}/tags/${id}`);
     const data = await response.json();
@@ -20,7 +20,7 @@ export async function getTagById(id) {
   }
 }
 
-export async function getAllPhotoByTag(id) {
+export async function getAllPhotoByTag(id: number) {
   try {
     const response = await fetch(`${url}/tags/photos/${id}`);
     const data = await response.json();
@@ -30,7 +30,7 @@ export async function getAllPhotoByTag(id) {
   }
 }
 
-export async function upVotePhoto(id) {
+export async function upVotePhoto(id: number) {
   try {
     const response = await fetch(`${url}/photos/${id}/vote`, {
       method: 'PUT',

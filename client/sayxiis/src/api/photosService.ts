@@ -1,3 +1,5 @@
+import { Photos, PhotoTags } from "../Interfaces";
+
 const url = 'http://localhost:3001';
 
 export async function getAllPhotosDb() {
@@ -20,7 +22,7 @@ export async function getAllUserPhoto() {
   }
 }
 
-export async function getAllUserPhotoById(id) {
+export async function getAllUserPhotoById(id: number) {
   try {
     const response = await fetch(`${url}/users/photos/${id}`);
     const data = await response.json();
@@ -30,7 +32,7 @@ export async function getAllUserPhotoById(id) {
   }
 }
 
-export async function addNewPhoto(photo) {
+export async function addNewPhoto(photo: Photos) {
   try {
     const response = await fetch(`${url}/photos`, {
       method: 'POST',
@@ -43,24 +45,21 @@ export async function addNewPhoto(photo) {
       }),
     });
     const data = await response.json();
+    console.log(data)
     return data;
   } catch (error) {
     console.log(error);
   }
 }
 
-export async function addNewPhotoWithTag(photo) {
+export async function addNewPhotoWithTag(photo: PhotoTags) {
   try {
     const response = await fetch(`${url}/photos/withtag`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        userId: photo.userId,
-        photoUrl: photo.photoUrl,
-        tagId: photo.tagId,
-      }),
+      body: JSON.stringify({photo}),
     });
     const data = await response.json();
     return data;
@@ -69,7 +68,7 @@ export async function addNewPhotoWithTag(photo) {
   }
 }
 
-export async function deletePhoto(id) {
+export async function deletePhoto(id: number) {
   try {
     const response = await fetch(`${url}/photos/${id}`, {
       method: 'DELETE',
@@ -87,7 +86,7 @@ export async function deletePhoto(id) {
 }
 
 //I moved this to Tag
-export async function upVotePhoto(id) {
+export async function upVotePhoto(id: number) {
   try {
     const response = await fetch(`${url}/photos/${id}/vote`, {
       method: 'PUT',
@@ -103,7 +102,7 @@ export async function upVotePhoto(id) {
   }
 }
 
-export async function winSticker(id) {
+export async function winSticker(id:number) {
   try {
     const response = await fetch(`${url}/photos/${id}/sticker`, {
       method: 'PUT',

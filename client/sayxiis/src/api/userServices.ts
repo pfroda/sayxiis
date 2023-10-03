@@ -1,3 +1,5 @@
+import { UserLoged, UserRegister } from "../Interfaces";
+
 const url = 'http://localhost:3001';
 
 export async function getAllUsers() {
@@ -10,7 +12,7 @@ export async function getAllUsers() {
   }
 }
 
-export async function getUserById(id) {
+export async function getUserById(id: number) {
   try {
     const response = await fetch(`${url}/users/${id}`);
     const data = await response.json();
@@ -20,7 +22,7 @@ export async function getUserById(id) {
   }
 }
 
-export async function createUser(user) {
+export async function createUser(user: UserRegister) {
 
   try {
     const response = await fetch(`${url}/users/signup`, {
@@ -28,31 +30,24 @@ export async function createUser(user) {
       credentials: 'include',
       mode: 'cors',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        username: user.username,
-        email: user.email,
-        password: user.password
-      }),
+      body: JSON.stringify(user)
     });
     const data = await response.json();
     console.log(data)
     return data;
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    console.log(error.message);
   }
 }
 
-export async function logUser (user) {
+export async function logUser (user: UserLoged) {
   try {
     const response = await fetch(`${url}/users/signin`, {
       method: 'POST',
       credentials: 'include',
       mode: 'cors',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        email: user.email,
-        password: user.password
-      }),
+      body: JSON.stringify(user),
     });
     const data = await response.json();
     return data;
