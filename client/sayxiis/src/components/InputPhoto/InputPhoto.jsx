@@ -1,4 +1,4 @@
-import './styles/inputPhoto.css';
+import './inputPhoto.css';
 
 export default function ButtonPhoto({ uploadPhoto }) {
   return (

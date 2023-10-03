@@ -1,6 +1,6 @@
-import './styles/images.css';
-import { upVotePhoto } from '../api/photosService';
-import { useAuth } from '../context/authContext';
+import './images.css';
+import { upVotePhoto } from '../../api/photosService';
+import { useAuth } from '../../context/authContext';
 
 export default function Images({ photo, setPhotos }) {
   const { users } = useAuth();

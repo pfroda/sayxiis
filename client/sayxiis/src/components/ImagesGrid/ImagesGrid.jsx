@@ -1,5 +1,5 @@
 import Images from './Images';
-import './styles/imagesList.css';
+import './imagesgrid.css';
 
 export default function ImagesGrid({ photos }) {
   return (

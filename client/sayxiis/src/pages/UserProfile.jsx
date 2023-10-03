@@ -1,7 +1,6 @@
-import './styles/userProfile.css';
 import { useEffect } from 'react';
-import ListUserPhotos from '../components/ListUserPhotos';
-import UserHeader from '../components/UserHeader';
+import ListUserPhotos from '../components/ListUserPhotos/ListUserPhotos';
+import UserHeader from '../components/UserHeader/UserHeader';
 import { uploadPhotoToCloudinary } from '../api/cloudinaryService';
 import { getUserById } from '../api/userServices';
 import { addNewPhoto } from '../api/photosService';

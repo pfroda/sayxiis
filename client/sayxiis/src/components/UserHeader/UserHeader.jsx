@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Button from './Button';
-import InputPhoto from './InputPhoto';
-import './styles/userHeader.css';
+import Button from '../Button/Button';
+import InputPhoto from '../InputPhoto/InputPhoto';
+import './userHeader.css';
 
 export default function UserHeader({ user, uploadPhoto }) {
   const [isFollowed, setIsFollowed] = useState(false);

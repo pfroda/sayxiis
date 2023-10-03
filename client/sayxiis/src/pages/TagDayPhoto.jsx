@@ -1,11 +1,11 @@
-import '../components/styles/imagesList.css';
-import './styles/tagDayPhoto.css';
+import '../components/ImagesGrid/imagesgrid.css';
+import './tagDayPhoto.css';
 import { useEffect, useState } from 'react';
 import randomTag, { Tags } from '../util/randomTag';
-import Button from '../components/Button';
-import InputPhoto from '../components/InputPhoto';
-import Images from '../components/Images';
-import CountdownTimer from '../components/CountdownTimer';
+import Button from '../components/Button/Button';
+import InputPhoto from '../components/InputPhoto/InputPhoto';
+import Images from '../components/Images/Images';
+import CountdownTimer from '../components/CountdownTimer/CountdownTimer';
 import { uploadPhotoToCloudinary } from '../api/cloudinaryService';
 import { addNewPhotoWithTag, getAllUserPhoto } from '../api/photosService';
 import { getPhotosByQuery } from '../api/unsplashService';
@@ -119,7 +119,6 @@ export default function TagDayPhoto() {
                 <CountdownTimer onZero={() => setTimerReachedZero(true)} />
               </span>{' '}
             </div>
-
             <p className="text competionTag">
               Today tag: <span className="tag">#{tagDay.name}</span>
             </p>

@@ -1,4 +1,4 @@
-import './styles/button.css';
+import './button.css';
 
 export default function Button({ title, funcFollow }) {
   return (

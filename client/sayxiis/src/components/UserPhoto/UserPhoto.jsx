@@ -1,5 +1,5 @@
-import { deletePhoto } from '../api/photosService';
-import './styles/images.css';
+import { deletePhoto } from '../../api/photosService';
+import '../Images/images.css';
 
 export default function UserPhoto({ photo, setPhotos }) {
   
