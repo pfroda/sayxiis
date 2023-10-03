@@ -61,11 +61,7 @@ async function createUser(req, res) {
     const accessToken = jwt.sign({ id: newUser.id }, TOKEN_SECRET);
     console.log('Generated access token:', accessToken);
     res.cookie('token', accessToken, {httpOnly: true, secure: true, SameSite: 'strict', expires: new Date(Number(new Date()) + 30*60*1000)})
-    res.json({
-      id: username._id
-    })
-  
-    res.status(201).send({ accessToken });
+    res.status(201).send({accessToken, id: newUser.id})
   } catch (error) {
     console.error('Error creating user:', error);
     res.status(400).send({ error: error.message, message: 'Could not create user' });
