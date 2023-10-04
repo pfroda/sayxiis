@@ -1,10 +1,10 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const photoController = require('./controllers/photoController');
-const userController = require('./controllers/userProfileController');
-const tagController = require('./controllers/tagController');
-const photosTagsController = require('./controllers/photoTagController');
-const verifyToken = require('./middleware/authJwt');
+import photoController from './controllers/photoController';
+import userController from './controllers/userProfileController';
+import tagController from './controllers/tagController';
+import photosTagsController from './controllers/photoTagController';
+import verifyToken from './middleware/authJwt';
 
 
 // Photo Router
@@ -38,4 +38,4 @@ router.get('/photosTags', verifyToken, photosTagsController.getAllTagsByPhotos);
 router.get('/photosTags/:id', verifyToken, photosTagsController.getPhotosByTag);
 router.put('/photosTags/:id/vote', verifyToken, photosTagsController.votePhotoByTag);
 
-module.exports = router;
+export default router;

@@ -1,10 +1,10 @@
 require('dotenv').config();
-const express = require('express');
+import express from 'express';
 const app = express();
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const router = require('./router');
-const cookieParser = require('cookie-parser');
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import router from './router'
+import cookieParser from 'cookie-parser';
 
 const corsOptions = {
   origin: process.env.CORS_ORIGIN,

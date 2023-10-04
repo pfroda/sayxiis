@@ -1,4 +1,4 @@
-const db = require('../models/connectionDB');
+import db from '../models/connectionDB';
 const photosDb = db.photo;
 const tagsModel = db.tags;
 
@@ -105,7 +105,7 @@ async function winSticker(req, res) {
   }
 }
 
-module.exports = {
+export default {
   winSticker,
   votePhoto,
   getAllPhotos,

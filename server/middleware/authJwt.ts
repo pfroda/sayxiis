@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
-const TOKEN_SECRET = require("../config/.token");
+import jwt from "jsonwebtoken";
+import {TOKEN_SECRET} from "../config/.token";
 
 async function authMiddleware(req, res, next) {
     try {
@@ -16,4 +16,4 @@ async function authMiddleware(req, res, next) {
     }
 }
 
-module.exports = authMiddleware;
+export default authMiddleware;

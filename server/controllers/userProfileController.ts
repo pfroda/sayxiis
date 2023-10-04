@@ -1,9 +1,9 @@
-const db = require('../models/connectionDB');
+import db from '../models/connectionDB';
+import {TOKEN_SECRET} from "../config/.token";
+import jwt from "jsonwebtoken";
+import bcrypt from 'bcrypt';
 const userProfile = db.userProfile;
 const photosDb = db.photo;
-const TOKEN_SECRET = require('../config/.token')
-const jwt = require("jsonwebtoken");
-const bcrypt = require('bcrypt')
 
 async function getAllUsers(req, res) {
   try {
@@ -77,7 +77,6 @@ async function logUser (req, res) {
     const user = await userProfile.findOne({ where: { email: login.email } });
     // console.log('user in database', user)
     const validatedPass = await bcrypt.compare(login.password, user.password);
-    console.log('password matchs', validatedPass)
 
     if (!validatedPass) throw new Error();
     const accessToken = jwt.sign({ id: user.id }, TOKEN_SECRET);
@@ -142,7 +141,7 @@ async function getAllUserPhoto(req, res) {
   }
 }
 
-module.exports = {
+export default {
   getAllUsers,
   createUser,
   logUser,

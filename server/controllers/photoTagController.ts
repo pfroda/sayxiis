@@ -1,4 +1,4 @@
-const db = require('../models/connectionDB');
+import db from '../models/connectionDB';
 const photoTagsModel = db.photoTag;
 const photosDb = db.photo;
 const Tag = db.tags;
@@ -63,7 +63,7 @@ async function votePhotoByTag(req, res) {
   }
 }
 
-module.exports = {
+export default {
   getAllTagsByPhotos,
   getTagById,
   votePhotoByTag,
