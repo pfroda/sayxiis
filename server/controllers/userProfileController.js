@@ -60,7 +60,7 @@ async function createUser(req, res) {
 
     const accessToken = jwt.sign({ id: newUser.id }, TOKEN_SECRET);
     console.log('Generated access token:', accessToken);
-    res.cookie('token', accessToken, {httpOnly: true, secure: true, SameSite: 'true', expires: new Date(Number(new Date()) + 30*60*1000)})
+    res.cookie('token', accessToken, {httpOnly: true, secure: true, SameSite: 'true', expires: new Date(Date.now() + 60 * 60 * 1000 * 24)})
     res.status(201).send({accessToken, id: newUser.id})
   } catch (error) {
     console.error('Error creating user:', error);
@@ -82,7 +82,7 @@ async function logUser (req, res) {
     if (!validatedPass) throw new Error();
     const accessToken = jwt.sign({ id: user.id }, TOKEN_SECRET);
     // console.log('Generated access token:', accessToken);
-    res.cookie('token', accessToken, {httpOnly: true, secure: true, SameSite: 'true', expires: new Date(Number(new Date()) + 30*60*1000)});
+    res.cookie('token', accessToken, {httpOnly: true, secure: true, SameSite: 'true', expires: new Date(Date.now() + 60 * 60 * 1000 * 24)});
     // res.json({id: user.id})
     res.status(200).send({accessToken, id: user.id})
     } catch (error) {

@@ -1,6 +1,5 @@
 import { UserLoged, UserRegister } from "../Interfaces";
-
-const url = 'http://localhost:3001';
+const url = import.meta.env.VITE_APP_URL;
 
 export async function getAllUsers() {
   try {
