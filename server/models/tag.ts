@@ -1,4 +1,6 @@
-module.exports = (sequelize, DataTypes) => {
+import { Sequelize, DataTypes } from 'sequelize';
+
+export default (sequelize: Sequelize) => {
   const Tags = sequelize.define('Tags', {
     name: {
       type: DataTypes.STRING,

@@ -1,167 +1,61 @@
 # Sayxiis
 
-"App about photos for who like **ONLY** photos and competions."
+Sayxiis is an app for those who love photography and are tired of ads. You can post your favorite photos on your profile, view photos from other users, and participate in our daily contest. Every day, a random topic is selected, and users can vote for their favorite photo to determine the best picture of the day: the winner receives a sticker to display in their profile. Thanks to Sayxiis, there are no more ads – just people sharing their passion for photography!
 
-![](./plan/app_view.png)
+<img src="https://i.imgur.com/yLyWuj3.png" alt="Sayxiis website">
 
-#### Wireframes:
+## Getting started:
+1. Clone the repo:
 
-[Low-fidelity Figma](https://www.figma.com/file/m88ZyfM1Bkx4mgOfWqPdek/SayXiis-solo-project?type=design&node-id=0%3A1&mode=design&t=AZvoWwraqKkxfS0B-1)<br>
-[High-fidelity Figma](https://www.figma.com/file/YVVJ8opqaaTJLIEYIc5Mco/High-fidelity---Wireframe-Sayxiis?type=design&node-id=0-1&mode=design&t=7JUodlwObu6HdvZn-0)
+   ```bash
+      git clone https://github.com/pfroda/sayxiis
+      cd sayxiis
+    ```
+2. To run the app, you’ll need Cloudinary and Unsplash accounts and must add their respective API keys to your .env file. To obtain the Cloudinary API key:
 
-### What is Sayxiis?
+   - After creating your account, navigate to Settings (bottom left corner).
+   - Click on the "Access Keys" section to find your API Key.
+3. Create a .env file in your server’s root folder and set the required variables::
+   ```env
+      DB_NAME=sayxdb - the database name need be this one
+      DB_USER=your postgres username
+      DB_PASSWORD=your password
+      DB_HOST=your host
+      DB_DIALECT=postgres
+      DB_PORT=5432
 
-It is a app for who is tired for not be able to see anymore only photos on instagram or the photographers that you like. You can’t see any more their work because of the all random people with short videos came trying to seduce you. In this app you will be allowed only post photos, have a profile with your photos and the most fun part, it will have some kind of small competion like: “today only sky photos” and with tags and ranks (people will be able to vote in the photos) you can have fun doing it with others. Also I want at the end of the "day tag" (will reset at the midnight) the person with more votes get a "win sticker" that will show in their profile and everyone can compete to have a sticker and have fun posting a day tag photo.
+      VITE_APP_CLOUD_KEY=your key from Cloudinary
+      VITE_APP_API_KEY=your key from Unsplash
+   ```
+4. Create a .env file in your client’s root folder and set the variables:
 
-## Back End
+   ```env
+      VITE_APP_URL=your server URL
+   ```
+5. Install the dependencies and run the server:
 
-### Tecnologies used:
+   ```bash
+      cd server && npm install
+      npm run start:dev
+    ```
+6. Install the dependencies and run the client:
 
-- NodeJS v18.16.0
-- Postgree v6.0.5
-- Express
-- Sequalize
-  <br>
+   ```bash
+      cd client && npm install
+      npm run dev
+    ```
 
-### ⚠️ Installation Guide ⚠️
+## Tech stack:
 
-- Run "npm install" to install all dependencies
+Sayxiis is built with React.js for the frontend framework, React Context for state management, TypeScript language, Vite as the build tool, Vanilla CSS for styling, Express for the backend server, and PostgreSQL with Sequelize as the ORM for the database.
+## Documentations
 
-```bash
-npm i
-```
-
-- You need to have node and Postgree installed
-- Create an .env file in your project root folder and add your variables.
-  <br>
-
-### Creating User x
-
-You need to have 1 user for the app run
-(For now I don't have the implementation for the others users, if you put more than one user will break, yeah I need to make the getUserByID instead of getAllUsers)
-
-Use postman to create one: POST: localhost:3001/users
-
-```{
-  "username": "User x",
-  "email": "userx@email.com",
-  "password": 123,
-  "profilePicture": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2188&q=80",
-  "name": "User",
-  "surname": "X",
-  "intro": "User testing - Photos"
-}
-```
-
-### Creating .env file
-
-```{
-DB_NAME=sayxdb - name of database Need be this one
-DB_USER=postgres - Your username from Postgres
-DB_PASSWORD=Yourpasswordhere -  Your password from postgress
-DB_HOST=localhost  - Leave this likes this
-DB_DIALECT=postgres  - Leave this likes this
-DB_PORT=5432  - Leave this likes this
-}
-```
-
-### Creating the tags:
-
-You need create some tags on the DB for this app works
-(in this ordem because I didn't make the random tags come from the DB 🤣🤣
-I didn't have time!)
-
-use postman with:
-
-> POST: localhost:3001/tags
-
-```
-[
-    {
-        "name": "dog",
-    },
-    {
-        "name": "cat",
-    },
-    {
-        "name": "nature",
-    },
-    {
-        "name": "holiday",
-    },
-    {
-        "name": "food",
-    },
-    {
-        "name": "building",
-    },
-    {
-        "name": "plant",
-    }
-]
-```
-
-### Usage
-
-- go to cd server
-- Run "nodemoon index.js" to start the application.
-
-```bash
-nodemon  index.js
-```
-
-- Connect to the API using Postman on port 5432 (http://localhost:5432).
-  <br><br>
-
-## Front End:
-
-This is a [React.js](https://react.dev/learn) project with [`npm create vite@latest`](https://vitejs.dev/guide/).
-
-## Getting Started
-
-You need to have a cloudinary account and unsplash account [Check the documentation at the end of the page]
-
-1 - Go to the folder
-
-```bash
-cd client
-cd sayxiis
-```
-
-2 - Create a .env file:
-
-```
-# Cloudinary:
-VITE_APP_CLOUD_KEY=You key from cloudinary
-# Unsplash:
-VITE_APP_API_KEY=Your key from unsplash
-```
-
-2 - install all the dependencies
-
-```bash
-npm i
-```
-
-3 - Run the app
-
-```bash
-npm run dev
-```
-
-The app run one "http://localhost:5173/"
-
-### Documentations
-
-**Backend**
-
-- [Download NodeJs](https://nodejs.org/en/download)
-- [Download postgres](https://www.postgresql.org/)
-- [Sequalize](https://sequelize.org/docs/v6/getting-started/)
-- [Express](https://expressjs.com/en/starter/installing.html)<br>
-
-**Frontend**
-
-- [React](https://react.dev/)
 - [Api unsplash](https://unsplash.com/developers)
 - [Cloudinary](https://cloudinary.com/)
+
+
+## Author:
+
+Pau Fàbrega: [GitHub](https://github.com/pfroda/) - [Linkedin](https://www.linkedin.com/in/paufabregaroda/)<br>
+Cintia Siqueira: [GitHub](https://github.com/ciisiq) - [Linkedin](https://www.linkedin.com/in/cintia-siqueira/)<br>
+Xavier Fàbrega: [GitHub](https://github.com/xavierfapa/) - [Linkedin](https://www.linkedin.com/in/xavierfabregapascual/)
