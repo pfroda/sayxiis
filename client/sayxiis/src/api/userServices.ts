@@ -4,7 +4,10 @@ const url = 'http://localhost:3001';
 
 export async function getAllUsers() {
   try {
-    const response = await fetch(`${url}/users`);
+    const response = await fetch(`${url}/users`, {
+      method: 'GET',
+      credentials: 'include'
+    });
     const data = await response.json();
     return data;
   } catch (error) {
@@ -14,7 +17,10 @@ export async function getAllUsers() {
 
 export async function getUserById(id: number) {
   try {
-    const response = await fetch(`${url}/users/${id}`);
+    const response = await fetch(`${url}/users/${id}`, {
+      method: 'GET',
+      credentials: 'include'
+    });
     const data = await response.json();
     return data;
   } catch (error) {

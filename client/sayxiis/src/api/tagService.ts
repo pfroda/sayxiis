@@ -2,7 +2,10 @@ const url = 'http://localhost:3001';
 
 export async function getAllTags() {
   try {
-    const response = await fetch(`${url}/tags`);
+    const response = await fetch(`${url}/tags`, {
+      method: 'GET',
+      credentials: 'include'
+    });
     const data = await response.json();
     return data;
   } catch (error) {
@@ -12,7 +15,10 @@ export async function getAllTags() {
 
 export async function getTagById(id: number) {
   try {
-    const response = await fetch(`${url}/tags/${id}`);
+    const response = await fetch(`${url}/tags/${id}`, {
+      method: 'GET',
+      credentials: 'include'
+    });
     const data = await response.json();
     return data;
   } catch (error) {
@@ -22,7 +28,10 @@ export async function getTagById(id: number) {
 
 export async function getAllPhotoByTag(id: number) {
   try {
-    const response = await fetch(`${url}/tags/photos/${id}`);
+    const response = await fetch(`${url}/tags/photos/${id}`, {
+      method: 'GET',
+      credentials: 'include'
+    });
     const data = await response.json();
     return data;
   } catch (error) {
@@ -34,6 +43,7 @@ export async function upVotePhoto(id: number) {
   try {
     const response = await fetch(`${url}/photos/${id}/vote`, {
       method: 'PUT',
+      credentials: 'include',
     });
     console.log('response', response);
     if (response.status === 200) {

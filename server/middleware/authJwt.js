@@ -1,22 +1,21 @@
-// const jwt = require("jsonwebtoken");
-// const config = require("../config/.token");
-// // const db = require("../models");
-// const User = db.userProfileSchema;
+const jwt = require("jsonwebtoken");
+const TOKEN_SECRET = require("../config/.token");
 
-// async function verifyToken (req, res, next) {
-//     let {token} = req.cookies;
-  
-//     if (!token) {return res.status(403).send({ message: "No token provided!"});}
+async function authMiddleware(req, res, next) {
+    try {
+        const token = req.cookies.token; // Extract token from cookies
 
-//     try {
-//      const user = await jwt.verify(token, config.TOKEN_SECRET)
-//       req.user = user;
-//       next();
-//     } catch (err) {
-//       res.status(403).json({message: 'invalid token'})
-//     }
-//   };
+        if (!token) {
+            return res.status(403).send({ message: "No token provided!" });
+        }
 
-//   const authJwt = verifyToken;
+        const decoded = jwt.verify(token, TOKEN_SECRET);
+        req.user = decoded;
+        console.log('token workingggg')
+        next();
+    } catch (error) {
+        return res.status(403).json({ message: 'Invalid token' });
+    }
+}
 
-//   module.exports = authJwt;
+module.exports = authMiddleware;

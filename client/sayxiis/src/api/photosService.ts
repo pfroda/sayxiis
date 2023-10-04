@@ -4,7 +4,10 @@ const url = 'http://localhost:3001';
 
 export async function getAllPhotosDb() {
   try {
-    const response = await fetch(`${url}/photos`);
+    const response = await fetch(`${url}/photos`, {
+      method: 'GET',
+      credentials: 'include'
+    });
     const data = await response.json();
     return data;
   } catch (error) {
@@ -14,7 +17,10 @@ export async function getAllPhotosDb() {
 
 export async function getAllUserPhoto() {
   try {
-    const response = await fetch(`${url}/users/photos/1`);
+    const response = await fetch(`${url}/users/photos/1`, {
+      method: 'GET',
+      credentials: 'include'
+    });
     const data = await response.json();
     return data;
   } catch (error) {
@@ -24,7 +30,10 @@ export async function getAllUserPhoto() {
 
 export async function getAllUserPhotoById(id: number) {
   try {
-    const response = await fetch(`${url}/users/photos/${id}`);
+    const response = await fetch(`${url}/users/photos/${id}`, {
+      method: 'GET',
+      credentials: 'include'
+    });
     const data = await response.json();
     return data;
   } catch (error) {
@@ -36,6 +45,7 @@ export async function addNewPhoto(photo: Photos) {
   try {
     const response = await fetch(`${url}/photos`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -56,6 +66,7 @@ export async function addNewPhotoWithTag(photo: PhotoTags) {
   try {
     const response = await fetch(`${url}/photos/withtag`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -72,6 +83,7 @@ export async function deletePhoto(id: number) {
   try {
     const response = await fetch(`${url}/photos/${id}`, {
       method: 'DELETE',
+      credentials: 'include',
     });
 
     if (!response.ok) {
@@ -90,6 +102,7 @@ export async function upVotePhoto(id: number) {
   try {
     const response = await fetch(`${url}/photos/${id}/vote`, {
       method: 'PUT',
+      credentials: 'include',
     });
     console.log('response', response);
     if (response.status === 200) {
@@ -106,6 +119,7 @@ export async function winSticker(id:number) {
   try {
     const response = await fetch(`${url}/photos/${id}/sticker`, {
       method: 'PUT',
+      credentials: 'include',
     });
     const data = await response.json();
     return data;
